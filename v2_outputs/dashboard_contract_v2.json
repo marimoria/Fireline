@@ -1,0 +1,38 @@
+{
+  "name": "FIRELINE Dynamic Verification Priority — Checkpoint 1",
+  "status": "historical low-fi prototype",
+  "unit_of_analysis": "0.1 degree grid x date",
+  "primary_key": [
+    "grid_id",
+    "date"
+  ],
+  "filters": [
+    "date",
+    "province_boundary_label",
+    "priority_level"
+  ],
+  "score_status": "provisional; requires stakeholder validation",
+  "score_weights": {
+    "activity_score": 0.35,
+    "persistence_score": 0.3,
+    "intensity_score": 0.2,
+    "exposure_score": 0.15
+  },
+  "score_thresholds": {
+    "P1_min": 77.76549560395462,
+    "P2_min": 62.03741198788808
+  },
+  "forbidden_claims": [
+    "verified fire",
+    "official hazard level",
+    "predictive early warning",
+    "peat fire based on nighttime observation alone",
+    "automatic water-bombing recommendation"
+  ],
+  "recommended_ui_states": [
+    "P1",
+    "P2",
+    "P3",
+    "DATA TERBATAS"
+  ]
+}
