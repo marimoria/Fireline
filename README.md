@@ -150,7 +150,7 @@ Kolom `type` membedakan: 0 = vegetasi/lahan, 1 = gunung berapi aktif, 2 = sumber
 
 **Filter Koordinat Kalimantan**
 
-Bounding box: lintang -5.0 sampai 7.7, bujur 108.5 sampai 119.5. Sebanyak 69 titik berada di luar batas ini (kemungkinan error GPS atau koordinat di perairan) dan dibuang. Data bersih: **57.785 titik api valid**.
+Bounding box: lintang -4.5 sampai 4.5, bujur 108.0 sampai 119.5. Sebanyak 3.798 titik berada di luar batas ini (kemungkinan error GPS atau koordinat di perairan) dan dibuang. Data bersih: **57.785 titik api valid**.
 
 **Distribusi per Tahun**
 
@@ -168,7 +168,7 @@ Bounding box: lintang -5.0 sampai 7.7, bujur 108.5 sampai 119.5. Sebanyak 69 tit
 
 **Spatial Join ke Provinsi**
 
-Menggunakan `geopandas.sjoin()` dengan poligon batas provinsi. Dari 57.785 titik, 57.716 berhasil dipetakan ke provinsi. 69 titik sisanya kemungkinan berada di perairan atau wilayah perbatasan dan dibuang di langkah sebelumnya.
+Menggunakan `geopandas.sjoin()` dengan poligon batas provinsi. Dari 57.785 titik, 57.716 berhasil dipetakan ke provinsi. Sisa titik lainnya kemungkinan berada di perairan atau wilayah perbatasan dan dibuang.
 
 **Algoritma BallTree Haversine untuk Jarak Sekolah**
 
@@ -187,9 +187,11 @@ FRP memiliki distribusi sangat ekstrem. Daripada bekerja dengan angka mentah, di
 | Tinggi | Q3 - P95 (12 - 34 MW) | 11.564 | 20% |
 | Ekstrem | Di atas P95 (> 34 MW) | 2.890 | 5% |
 
-**Penanda Musim Kemarau (is_dry_season)**
+**Fitur Tambahan yang Dihasilkan**
 
-Berdasarkan pola iklim Indonesia, musim kemarau di Kalimantan jatuh pada bulan Juni hingga Oktober. Variabel biner ini digunakan sebagai pengganda (1.5x) dalam model risiko, karena api yang terjadi saat musim kemarau memiliki risiko penyebaran yang jauh lebih tinggi dibandingkan saat musim hujan.
+1. `pixel_area_km2`: Menghitung estimasi luas area terbakar per piksel berdasarkan resolusi spasial instrumen satelit (scan × track).
+2. `is_dry_season`: Indikator biner (True/False) yang menandakan apakah kebakaran terjadi selama bulan kemarau. Rentang bulan kemarau ini **diturunkan secara dinamis (data-driven)** dari rata-rata curah hujan bulanan di bawah 150mm. Untuk data sampel saat ini, terdeteksi musim kemarau jatuh pada bulan Juli hingga Oktober.
+3. `is_peat_proxy`: Indikator boolean komposit untuk mendeteksi *smoldering peat fires* (kebakaran gambut yang membara). Ditandai True jika titik panas terdeteksi di malam hari (`daynight == 'N'`) namun memiliki nilai FRP rendah/menengah. Kebakaran permukaan (vegetasi biasa) umumnya mereda secara drastis di malam hari karena suhu udara turun dan kelembapan naik. Jika api tetap terdeteksi pada malam hari dengan energi yang tidak meledak-ledak, probabilitasnya tinggi bahwa itu adalah kebakaran bawah tanah (gambut).
 
 ---
 
@@ -201,32 +203,15 @@ Berdasarkan pola iklim Indonesia, musim kemarau di Kalimantan jatuh pada bulan J
 
 **Temuan 1: Konsentrasi Musim yang Ekstrem**
 
-Dari 57.785 titik api, **48.710 (84,3%)** terjadi di bulan Juni-Oktober. Puncak tertinggi adalah September: **24.582 titik** hanya dari satu bulan (42,5% dari total keseluruhan). Bulan terendah adalah Desember: hanya 286 titik.
+Dari 57.785 titik api, **48.710 (84,3%)** terjadi di bulan Juli-Oktober. Puncak tertinggi adalah September: **24.582 titik** hanya dari satu bulan (42,5% dari total keseluruhan). Bulan terendah adalah Desember: hanya 286 titik.
 
-| Bulan | Jumlah | Musim |
-|---|---|---|
-| Januari | 1.967 | Hujan |
-| Februari | 884 | Hujan |
-| Maret | 2.670 | Transisi |
-| April | 1.047 | Hujan |
-| Mei | 1.147 | Transisi |
-| Juni | 632 | **Kemarau** |
-| Juli | 7.198 | **Kemarau** |
-| Agustus | 10.568 | **Kemarau** |
-| September | 24.582 | **Kemarau** |
-| Oktober | 5.730 | **Kemarau** |
-| November | 1.074 | Transisi |
-| Desember | 286 | Hujan |
-
-*Apa artinya untuk Problem Statement:* Sumber daya penanganan karhutla (personel, pesawat water bombing, anggaran) tidak perlu didistribusikan merata sepanjang tahun. Alokasi sumber daya yang optimal adalah memusatkan kapasitas pada 3 bulan kritis: Juli, Agustus, September. Sistem FIRELINE harus **secara otomatis menaikkan status siaga** pada awal Juni dan menginformasikan stakeholder jauh sebelum puncak musim.
+*Apa artinya untuk Problem Statement:* Sumber daya penanganan karhutla (personel, pesawat water bombing, anggaran) tidak perlu didistribusikan merata sepanjang tahun. Alokasi sumber daya yang optimal adalah memusatkan kapasitas pada bulan-bulan kritis (Juli-Oktober). Sistem FIRELINE harus **secara otomatis menaikkan status siaga** pada awal Juni dan menginformasikan stakeholder jauh sebelum puncak musim.
 
 **Temuan 2: Kebakaran Malam Hari sebagai Sinyal Gambut**
 
 **6.140 titik api (10,6%)** terdeteksi di malam hari. Angka ini tampak kecil, namun signifikansinya sangat besar secara operasional.
 
 Api yang masih aktif terdeteksi satelit di malam hari — padahal embun dan penurunan suhu malam seharusnya meredam api kecil — adalah indikasi kuat **kebakaran gambut bawah permukaan (smoldering peat fire)**. Gambut yang terbakar di bawah tanah tidak terlihat dari atas, menghasilkan asap pekat secara terus-menerus, dan nyaris mustahil dipadamkan hanya dengan siraman air. Kebakaran gambut adalah sumber ISPA yang paling berbahaya karena berhari-hari hingga berminggu-minggu melepaskan partikel PM2.5 ke udara.
-
-Dari 6.140 kebakaran malam, **58,2%** terjadi selama musim kemarau — konsisten dengan pola gambut yang semakin kering dan rentan terbakar saat kemarau. Hanya 52 di antaranya (0,8%) masuk tier Tinggi+Ekstrem dalam hal FRP permukaan, yang berarti kebakaran gambut lebih *tersembunyi* (FRP rendah di permukaan) namun lebih *persisten* (terus menyala sepanjang malam).
 
 *Apa artinya untuk Problem Statement:* Dashboard karhutla konvensional yang hanya menampilkan titik panas dengan FRP tinggi akan **melewatkan ancaman gambut ini**. FIRELINE harus menyertakan filter dan indikator khusus untuk kebakaran malam dengan FRP rendah-menengah yang persisten, karena itu adalah sinyal gambut yang justru paling berbahaya secara jangka panjang.
 
@@ -244,8 +229,9 @@ Dari 6.140 kebakaran malam, **58,2%** terjadi selama musim kemarau — konsisten
 | Kalimantan Timur | 9.615 | 16,6% | 61,5 | 550 MW |
 | Kalimantan Tengah | 8.481 | 14,7% | 51,6 | **955 MW** |
 | Kalimantan Selatan | 3.601 | 6,2% | 63,7 | 826 MW |
+| is_dry_season | Boolean (True/False) | Menandakan apakah kejadian berada di musim kemarau (Berdasarkan data cuaca aktual: Jul-Okt). Berfungsi sebagai multiplier risiko. |
 
-*Apa artinya untuk Problem Statement:* Kalimantan Barat bukan hanya paling banyak titik apinya, tetapi juga memiliki rata-rata skor risiko tertinggi (78,1 dari 100) — menunjukkan bahwa kebakaran di Kalimantan Barat secara konsisten berada lebih dekat dengan infrastruktur rentan dan terjadi lebih sering di musim kemarau. Sementara Kalimantan Tengah memiliki titik FRP ekstrem tertinggi (955 MW), menunjukkan bahwa ada kebakaran sangat intens yang butuh penanganan udara (water bombing) di sana meskipun jumlahnya lebih sedikit.
+*Apa artinya untuk Problem Statement:* Kalimantan Barat bukan hanya paling banyak titik apinya, tetapi juga memiliki rata-rata skor risiko tertinggi (78,1 dari 100). Sementara Kalimantan Tengah memiliki titik FRP ekstrem tertinggi (955 MW), menunjukkan bahwa ada kebakaran sangat intens yang butuh penanganan udara (water bombing) di sana meskipun jumlahnya lebih sedikit.
 
 **Temuan 4: 90,7% Titik Api Kritis Mengancam Sekolah dalam 5 km**
 
@@ -259,42 +245,17 @@ Kurva CDF jarak ke sekolah terdekat mengungkapkan temuan yang mengubah paradigma
 | < 5 km | 46.770 | **80,9%** |
 | < 10 km | 55.484 | 96,0% |
 
-Median jarak ke sekolah adalah **2,71 km**. Persentil ke-10 adalah 0,96 km. Artinya, 10% titik api berada dalam jarak kurang dari 1 km dari sekolah.
-
-Yang lebih mengejutkan: dari 16.395 titik yang dikategorikan **Kritis**, **14.863 (90,7%)** berada dalam 5 km dari sekolah, dan **11.294 (68,9%)** berada dalam 3 km.
-
-*Interpretasi yang Benar:* Angka 80,9% ini bukan berarti 80% sekolah sedang terbakar. Ini berarti: sebaran sekolah di Kalimantan cukup merata sehingga hampir tidak ada wilayah berpenghuni yang tidak memiliki sekolah dalam radius 5 km. Dengan kata lain, **setiap titik api yang muncul di dekat permukiman hampir pasti mengancam sekolah**.
-
-*Apa artinya untuk Problem Statement:* Jarak ke sekolah adalah proksi yang sangat kuat untuk mengukur "apakah ada manusia yang terancam di sekitar titik api ini". Ini justifikasi ilmiah mengapa Skor Paparan (*Exposure Score*) berbasis jarak sekolah mendapat bobot 40% dalam formula risiko komposit kami. Fitur ini menjadi jembatan antara sinyal satelit mentah (titik koordinat) dengan dampak manusiawi yang konkret (berapa orang, terutama anak-anak, yang terancam).
+*Interpretasi yang Benar:* Angka 80,9% ini berarti sebaran sekolah di Kalimantan cukup merata sehingga hampir tidak ada wilayah berpenghuni yang tidak memiliki sekolah dalam radius 5 km. Dengan kata lain, **setiap titik api yang muncul di dekat permukiman hampir pasti mengancam sekolah**.
 
 ---
 
 #### Modul C: Intensitas Api (FRP) — Seberapa Parah dan Siapa yang Butuh Penanganan Udara
 
-**Pendekatan:** Histogram skala-log dengan marker persentil, boxplot per provinsi dengan outlier inklusif pada skala logaritmik, donut chart proporsi tier keparahan.
-
 **Temuan 5: Distribusi FRP yang Sangat Timpang (Right-Skewed)**
 
-Statistik deskriptif FRP:
-
-| Statistik | Nilai |
-|---|---|
-| Minimum | 0,09 MW |
-| Median (P50) | **6,27 MW** |
-| Rata-rata | 10,81 MW |
-| P75 | 11,73 MW |
-| P90 | 22,62 MW |
-| P95 | **33,63 MW** |
-| P99 | 71,51 MW |
-| Maksimum | **954,79 MW** |
-
-Rata-rata (10,81 MW) jauh di atas median (6,27 MW). Ini adalah tanda klasik distribusi right-skewed: sebagian kecil nilai ekstrem yang sangat besar menarik rata-rata ke atas. Visualisasi langsung dari histogram linier akan *menyembunyikan* mayoritas data di sisi kiri. Oleh karena itu kami menggunakan skala logaritmik pada sumbu X.
-
-*Apa artinya untuk Problem Statement:* 95% kebakaran (54.895 titik) memiliki FRP di bawah 33,63 MW — ukuran yang masih bisa ditangani oleh tim darat. Hanya **2.890 titik (5%)** yang masuk tier Ekstrem (FRP > P95). Inilah klaster yang **harus menjadi target water bombing dari udara** karena skalanya sudah melampaui kapasitas pemadaman darat. Tanpa analisis distribusi ini, sumber daya udara yang mahal mungkin tersebar tidak efisien.
+*Apa artinya untuk Problem Statement:* 95% kebakaran (54.895 titik) memiliki FRP di bawah 33,63 MW — ukuran yang masih bisa ditangani oleh tim darat. Hanya **2.890 titik (5%)** yang masuk tier Ekstrem (FRP > P95). Inilah klaster yang **harus menjadi target water bombing dari udara** karena skalanya sudah melampaui kapasitas pemadaman darat.
 
 **Temuan 6: Kalimantan Tengah Menyimpan Api Paling Mematikan**
-
-Meskipun Kalimantan Barat memiliki jumlah titik api terbanyak (62,3%), Kalimantan Tengah memiliki FRP maksimum tertinggi (954,79 MW) — hampir dua kali lipat FRP maksimum Kalimantan Barat (652,45 MW). Boxplot per provinsi dengan outlier inklusif menunjukkan bahwa Kalimantan Tengah memiliki distribusi ekor kanan yang jauh lebih panjang.
 
 *Apa artinya untuk Problem Statement:* Pemimpin operasional yang hanya melihat jumlah titik api per provinsi akan salah mengalokasikan sumber daya water bombing — seharusnya fokus ke Kalimantan Tengah untuk api ekstrem, bukan hanya ke Kalimantan Barat. Ini adalah bukti bahwa **volume titik api dan intensitas titik api adalah dua masalah yang berbeda dan butuh respons berbeda**.
 
@@ -302,9 +263,10 @@ Meskipun Kalimantan Barat memiliki jumlah titik api terbanyak (62,3%), Kalimanta
 
 #### Modul D: Korelasi Cuaca — Fondasi Sistem Prediktif
 
-**Pendekatan:** Time series dual-axis curah hujan vs jumlah titik api harian, scatter plot bubble dengan ukuran lingkaran mewakili frekuensi (jumlah hari dalam kelompok curah hujan yang sama).
-
-*Catatan teknis penting:* Dataset iklim historis (climate_data.csv) mencakup 2010-2020, sementara data hotspot mencakup 2024-2026. Untuk keperluan analisis korelasi, tanggal iklim digeser 14 tahun ke depan agar overlap dengan periode hotspot. Ini adalah teknik *date-shifting* untuk demonstrasi korelasi musiman (bukan prediksi temporal spesifik).
+*Catatan teknis penting:* Dataset iklim historis (climate_data.csv) mencakup 2010-2020, sementara data hotspot mencakup 2024-2026. Terdapat beberapa batasan metodologis dalam penggabungan data ini yang dilakukan semata-mata demi kebutuhan demonstrasi pipeline analisis:
+1. **Asumsi Keseragaman Musiman (Spatial Limitation):** Karena keterbatasan akses API historis gratis, `season_mult` dan tren kemarau saat ini diturunkan murni dari data satu stasiun (Pontianak) yang kemudian dipukul-rata seolah-olah merepresentasikan seluruh Kalimantan (4 provinsi lainnya). Di dunia nyata, curah hujan Kaltim dan Kalbar bisa sangat berbeda pada bulan yang sama.
+2. **Asumsi Granularitas Waktu (Temporal Limitation):** Standar BMKG untuk penentuan musim menggunakan hitungan "dasarian" (per 10 hari). Dalam pipeline ini, perhitungan disederhanakan menjadi rata-rata agregat bulanan secara penuh.
+3. **Penyelarasan Buatan (Artificial Date-Shifting):** Data iklim BMKG historis (2010–2020) sengaja *digeser* (date-shifted) sebanyak 14 tahun ke depan agar seolah-olah sejajar secara waktu dengan data satelit FIRMS (2024–2026). Ini berarti grafik yang ditampilkan **bukan** menunjukkan bahwa suhu 35°C pada tanggal 10 Agustus 2024 menyebabkan titik api di hari yang sama, melainkan bahwa *pola historis cuaca Agustus 2010* sedang disandingkan dengan *pola titik api Agustus 2024*. Pendekatan ini sah untuk analisis musiman makro, tetapi tidak valid untuk regresi prediktif *real-time*.
 
 **Temuan 7: Korelasi Negatif yang Kuat antara Curah Hujan dan Kemunculan Api**
 
