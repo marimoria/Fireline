@@ -1,2 +1,5 @@
 notebooks/pythons/*.py
 data/processed/
+task.md
+walkthrough.md
+implementation_plan.md
