@@ -1,0 +1,16 @@
+*.csv
+data/external/raw/
+outputs/external_validation/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.py
+.venv/
+venv/
+.env
+.env.*
+temp/
+tmp/
+cache/
+SCRIPT_*.md
+TEAM_HANDOFF_AND_PRESENTATION_SCRIPT.md

@@ -1,0 +1,39 @@
+{
+  "product": "FIRELINE MVP",
+  "unit": "one active grid on one date",
+  "primary_key": [
+    "grid_id",
+    "date"
+  ],
+  "score_status": "provisional heuristic; not a probability",
+  "score_inputs": {
+    "activity_score": 0.4,
+    "persistence_score": 0.35,
+    "intensity_score": 0.25
+  },
+  "context_not_in_score": [
+    "province_name",
+    "nearest_school_distance_km",
+    "PRECTOTCORR",
+    "T2M",
+    "RH2M",
+    "WS2M"
+  ],
+  "priority_labels": [
+    "P1 - Periksa lebih dahulu",
+    "P2 - Pantau ketat",
+    "P3 - Pemantauan biasa"
+  ],
+  "guardrails": [
+    "FIRMS is a satellite thermal anomaly observation, not verified fire",
+    "school proximity does not prove impact",
+    "weather correlation does not prove causation",
+    "human verification remains required"
+  ],
+  "api_status": "conceptual handoff only; deployed API out of MVP scope",
+  "publication_status": "review snapshot; previous outputs retained, not recomputed",
+  "weather_validation_status": "pending UTC-LST daily-window alignment and spatial-domain review",
+  "weather_coverage_definition": "matching date-label availability only; not aligned 24-hour windows",
+  "weather_in_score": false,
+  "school_median_unit": "grid-day rows; each grid-center distance repeated for every active date"
+}

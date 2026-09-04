@@ -1,0 +1,18 @@
+{
+  "firms_rows": 61583,
+  "unique_grids": 2954,
+  "grid_date_rows": 27411,
+  "date_start": "2024-08-01",
+  "date_end": "2026-05-31",
+  "province_coverage_percent": 97.09605632775164,
+  "weather_coverage_percent": 100.0,
+  "median_nearest_school_km": 2.940358931660761,
+  "p1_rows": 3114,
+  "demo_date": "2024-09-03",
+  "demo_p1_rows": 51,
+  "publication_status": "review snapshot; previous outputs retained, not recomputed",
+  "weather_validation_status": "pending UTC-LST daily-window alignment and spatial-domain review",
+  "weather_coverage_definition": "matching date-label availability only; not aligned 24-hour windows",
+  "weather_in_score": false,
+  "school_median_unit": "grid-day rows; each grid-center distance repeated for every active date"
+}
