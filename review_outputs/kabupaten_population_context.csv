@@ -1,0 +1,57 @@
+kabupaten_code,province_code,kabupaten_name,population,population_density,population_year,_merge
+61.01,61,Sambas,,,,left_only
+61.02,61,Mempawah,,,,left_only
+61.03,61,Sanggau,,,,left_only
+61.04,61,Ketapang,,,,left_only
+61.05,61,Sintang,,,,left_only
+61.06,61,Kapuas Hulu,,,,left_only
+61.07,61,Bengkayang,,,,left_only
+61.08,61,Landak,,,,left_only
+61.09,61,Sekadau,,,,left_only
+61.10,61,Melawi,,,,left_only
+61.11,61,Kayong Utara,,,,left_only
+61.12,61,Kubu Raya,,,,left_only
+61.71,61,Kota Pontianak,,,,left_only
+61.72,61,Kota Singkawang,,,,left_only
+62.01,62,Kotawaringin Barat,282790.0,,2024.0,both
+62.02,62,Kotawaringin Timur,,,,left_only
+62.03,62,Kapuas,430180.0,,2024.0,both
+62.04,62,Barito Selatan,135910.0,,2024.0,both
+62.05,62,Barito Utara,162620.0,,2024.0,both
+62.06,62,Katingan,171860.0,,2024.0,both
+62.07,62,Seruyan,174310.0,,2024.0,both
+62.08,62,Sukamara,67810.0,,2024.0,both
+62.09,62,Lamandau,103680.0,,2024.0,both
+62.10,62,Gunung Mas,145530.0,,2024.0,both
+62.11,62,Pulang Pisau,139510.0,,2024.0,both
+62.12,62,Murung Raya,118440.0,,2024.0,both
+62.13,62,Barito Timur,118760.0,,2024.0,both
+62.71,62,Kota Palangkaraya,,,,left_only
+63.01,63,Tanah Laut,365000.0,95.0,2024.0,both
+63.02,63,Kotabaru,,,,left_only
+63.03,63,Banjar,600600.0,131.0,2024.0,both
+63.04,63,Barito Kuala,331000.0,136.0,2024.0,both
+63.05,63,Tapin,198900.0,92.0,2024.0,both
+63.06,63,Hulu Sungai Selatan,238800.0,141.0,2024.0,both
+63.07,63,Hulu Sungai Tengah,268800.0,183.0,2024.0,both
+63.08,63,Hulu Sungai Utara,237100.0,252.0,2024.0,both
+63.09,63,Tabalong,266900.0,77.0,2024.0,both
+63.10,63,Tanah Bumbu,342400.0,70.0,2024.0,both
+63.11,63,Balangan,138100.0,76.0,2024.0,both
+63.71,63,Kota Banjarmasin,668800.0,6798.0,2024.0,both
+63.72,63,Kota Banjarbaru,,,,left_only
+64.01,64,Paser,286990.0,,2024.0,both
+64.02,64,Kutai Kartanegara,789770.0,,2024.0,both
+64.03,64,Berau,261829.99999999997,,2024.0,both
+64.07,64,Kutai Barat,178740.0,,2024.0,both
+64.08,64,Kutai Timur,462990.0,,2024.0,both
+64.09,64,Penajam Paser Utara,267690.0,,2024.0,both
+64.11,64,Mahakam Ulu,34250.0,,2024.0,both
+64.71,64,Kota Balikpapan,,,,left_only
+64.72,64,Kota Samarinda,,,,left_only
+64.74,64,Kota Bontang,,,,left_only
+65.01,65,Bulungan,160200.0,12.0,2024.0,both
+65.02,65,Malinau,86500.0,2.0,2024.0,both
+65.03,65,Nunukan,210900.0,15.0,2024.0,both
+65.04,65,Tana Tidung,28200.0,6.0,2024.0,both
+65.71,65,Kota Tarakan,253900.0,1011.0,2024.0,both
