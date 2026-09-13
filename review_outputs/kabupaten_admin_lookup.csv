@@ -1,0 +1,57 @@
+kabupaten_code,province_code,province_name,kabupaten_name,_source_file
+61.01,61,Kalimantan Barat,Sambas,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.02,61,Kalimantan Barat,Mempawah,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.03,61,Kalimantan Barat,Sanggau,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.04,61,Kalimantan Barat,Ketapang,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.05,61,Kalimantan Barat,Sintang,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.06,61,Kalimantan Barat,Kapuas Hulu,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.07,61,Kalimantan Barat,Bengkayang,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.08,61,Kalimantan Barat,Landak,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.09,61,Kalimantan Barat,Sekadau,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.10,61,Kalimantan Barat,Melawi,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.11,61,Kalimantan Barat,Kayong Utara,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.12,61,Kalimantan Barat,Kubu Raya,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.71,61,Kalimantan Barat,Kota Pontianak,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+61.72,61,Kalimantan Barat,Kota Singkawang,Provinsi Kalimantan Barat-KAB_KOTA.geojson
+62.01,62,Kalimantan Tengah,Kotawaringin Barat,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.02,62,Kalimantan Tengah,Kotawaringin Timur,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.03,62,Kalimantan Tengah,Kapuas,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.04,62,Kalimantan Tengah,Barito Selatan,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.05,62,Kalimantan Tengah,Barito Utara,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.06,62,Kalimantan Tengah,Katingan,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.07,62,Kalimantan Tengah,Seruyan,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.08,62,Kalimantan Tengah,Sukamara,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.09,62,Kalimantan Tengah,Lamandau,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.10,62,Kalimantan Tengah,Gunung Mas,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.11,62,Kalimantan Tengah,Pulang Pisau,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.12,62,Kalimantan Tengah,Murung Raya,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.13,62,Kalimantan Tengah,Barito Timur,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+62.71,62,Kalimantan Tengah,Kota Palangkaraya,Provinsi Kalimantan Tengah-KAB_KOTA.geojson
+63.01,63,Kalimantan Selatan,Tanah Laut,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.02,63,Kalimantan Selatan,Kotabaru,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.03,63,Kalimantan Selatan,Banjar,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.04,63,Kalimantan Selatan,Barito Kuala,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.05,63,Kalimantan Selatan,Tapin,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.06,63,Kalimantan Selatan,Hulu Sungai Selatan,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.07,63,Kalimantan Selatan,Hulu Sungai Tengah,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.08,63,Kalimantan Selatan,Hulu Sungai Utara,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.09,63,Kalimantan Selatan,Tabalong,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.10,63,Kalimantan Selatan,Tanah Bumbu,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.11,63,Kalimantan Selatan,Balangan,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.71,63,Kalimantan Selatan,Kota Banjarmasin,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+63.72,63,Kalimantan Selatan,Kota Banjarbaru,Provinsi Kalimantan Selatan-KAB_KOTA.geojson
+64.01,64,Kalimantan Timur,Paser,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.02,64,Kalimantan Timur,Kutai Kartanegara,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.03,64,Kalimantan Timur,Berau,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.07,64,Kalimantan Timur,Kutai Barat,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.08,64,Kalimantan Timur,Kutai Timur,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.09,64,Kalimantan Timur,Penajam Paser Utara,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.11,64,Kalimantan Timur,Mahakam Ulu,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.71,64,Kalimantan Timur,Kota Balikpapan,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.72,64,Kalimantan Timur,Kota Samarinda,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+64.74,64,Kalimantan Timur,Kota Bontang,Provinsi Kalimantan Timur-KAB_KOTA.geojson
+65.01,65,Kalimantan Utara,Bulungan,Provinsi Kalimantan Utara-KAB_KOTA.geojson
+65.02,65,Kalimantan Utara,Malinau,Provinsi Kalimantan Utara-KAB_KOTA.geojson
+65.03,65,Kalimantan Utara,Nunukan,Provinsi Kalimantan Utara-KAB_KOTA.geojson
+65.04,65,Kalimantan Utara,Tana Tidung,Provinsi Kalimantan Utara-KAB_KOTA.geojson
+65.71,65,Kalimantan Utara,Kota Tarakan,Provinsi Kalimantan Utara-KAB_KOTA.geojson
