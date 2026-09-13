@@ -6,9 +6,10 @@ Prototipe DSA untuk **fitur 02 / Mapping**, mengikuti batas lingkup keputusan PM
 
 ## Mulai membaca
 
-- **Dashboard:** buka `review_outputs/FIRELINE_Priority_Map.html` yang sudah dibangun di komputer kerja. Filter, daftar, dan detail berada dalam satu berkas; pustaka peta serta peta dasar memerlukan internet.
+- **Dashboard:** buka `review_outputs/FIRELINE_Priority_Map.html` yang sudah dibangun di komputer kerja. Filter tanggal/provinsi/kabupaten, mode historis, daftar, dan detail berada dalam satu berkas; pustaka peta serta peta dasar memerlukan internet.
 - **Notebook 05 — Dataset Scope Audit:** menjelaskan satuan data, pemeriksaan waktu/koordinat, penyaringan lima provinsi, dan mengapa jumlah data berbeda dari versi lama.
 - **Notebook 06 — MVP Priority Map:** menjelaskan pembentukan area-hari, aktivitas, persistensi, FRP, kontribusi skor, uji sensitivitas, konteks sekolah, dan pembuatan dashboard.
+- **Notebook 07 — Kabupaten Drilldown:** validasi hierarki kabupaten/kota hasil integrasi Kaka tanpa mengubah skor utama.
 - **[Laporan review](REVIEW_REPORT.md):** hasil penting, perbedaan versi, dan keputusan yang masih perlu ditinjau PMA/UX.
 - **[Definisi data dan skor](DATA_CONTRACT.md):** acuan penyamaan istilah serta aturan perhitungan.
 
@@ -38,13 +39,13 @@ Sekolah hanya konteks fasilitas. Jarak dihitung dari observasi representatif ke 
 
 Dataset utama tetap berkas FIRMS yang diberikan dalam proyek. BIG dipakai untuk penyaringan geografis; dataset sekolah untuk konteks. Geometri kab/kota diambil dari HTML Kaka, **tanpa memakai skor atau ranking lamanya**. Sumber/tahun asli geometri kab/kota masih perlu dilengkapi; jika HTML tidak tersedia, aplikasi menggunakan poligon provinsi BIG.
 
-Nama, ukuran, dan SHA-256 setiap masukan tercatat dalam `review_outputs/audit_summary.json`. CSV, konfigurasi lokasi berkas, dan payload dashboard tetap lokal. Berkas HTML mengandung data lokasi; periksa dahulu sebelum membagikannya.
+Nama, ukuran, dan SHA-256 setiap masukan tercatat dalam `review_outputs/audit_summary.json`. CSV, konfigurasi lokasi berkas, dan payload dashboard tetap lokal. Berkas HTML mengandung data lokasi; periksa dahulu sebelum membagikannya. Ringkasan keputusan integrasi kabupaten/kota ada di `KAKA_INTEGRATION.md`.
 
 Referensi: [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/active_fire/), [BIG batas provinsi](https://geoservices.big.go.id/gis/rest/services/STIG/Batas_Provinsi/MapServer), [dataset sekolah](https://www.kaggle.com/datasets/marchotridyo/indonesia-school-dataset-with-province-data).
 
 ## Menjalankan ulang (opsional)
 
-Gunakan Python 3.12 dan `requirements.txt`. Salin `config.example.json` menjadi `config.local.json`, lalu isi lokasi berkas lokal. Jalur relatif dibaca dari folder konfigurasi. Tidak ada unduhan dataset otomatis.
+Gunakan Python 3.12 dan `requirements.txt`. Salin `config.example.json` menjadi `config.local.json`, lalu isi lokasi berkas lokal. Jalur relatif dibaca dari folder konfigurasi. Pipeline tidak mengunduh otomatis; bila perlu, ambil bundle bersama secara eksplisit dengan `python fetch_fireline_dataset.py` (opsional `--output data` atau `HF_TOKEN`).
 
 ```powershell
 python -m pip install -r requirements.txt

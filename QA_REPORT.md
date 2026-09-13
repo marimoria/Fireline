@@ -1,6 +1,6 @@
 # Hasil Pengujian Lokal
 
-10 September 2026 — `priority-map-1.0`. Pengujian teknis tidak sama dengan validasi manfaat atau keamanan operasional.
+13 September 2026 — `priority-map-1.0`. Pengujian teknis tidak sama dengan validasi manfaat atau keamanan operasional.
 
 ## Otomatis
 
@@ -34,6 +34,7 @@ Kedua notebook dijalankan dari awal dengan `nbconvert --execute`. Pipeline berha
 | Reset demo | Kembali ke tanggal/provinsi awal dengan 2.399 observasi |
 | Desktop 1280×900 dan mobile 390×844 | Layout menyesuaikan; mobile tidak memiliki overflow horizontal (lebar konten = lebar halaman 375 px) |
 | Console browser | Tidak ada error pada sesi pengujian |
+| Tableau workbook | Berhasil dipublish ulang; peta tidak kosong, tren dan Top 10 tampil, serta tooltip marker dikonfigurasi dengan field inti area/prioritas/observasi/FRP/koordinat/sekolah/waktu |
 
 Catatan UX: nomor di wilayah padat dapat bertumpuk pada zoom seluruh Kalimantan; klik dapat mengenai marker paling depan. Daftar Top 10 dan zoom tersedia sebagai pilihan yang tidak ambigu, dan petunjuk ditambahkan di atas peta. Jangan menafsirkan nomor bertumpuk sebagai ranking yang berbeda. Akses keyboard marker belum dinyatakan lolos; gunakan baris daftar yang berupa tombol untuk pemilihan area.
 

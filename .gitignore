@@ -18,3 +18,4 @@ review_outputs/*.png
 review_outputs/validation_local.json
 notebooks/.ipynb_checkpoints/
 **/cache/
+tableau_work/

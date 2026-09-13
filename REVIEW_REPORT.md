@@ -1,12 +1,14 @@
 # Laporan Review Lokal FIRELINE
 
-Tanggal: 10 September 2026. Status: implementasi prototipe fitur Mapping selesai untuk review; belum commit/push, belum produk operasional.
+Tanggal: 13 September 2026. Status: implementasi prototipe fitur Mapping selesai untuk review; siap dipush ke branch `checkpoint3`, belum produk operasional.
 
 ## Yang sudah dikerjakan
 
 - Audit dataset utama secara per-observasi terhadap batas lima provinsi BIG.
 - Dua notebook aktif yang berhasil dijalankan ulang, dengan tabel dan visualisasi hasil.
 - Dashboard HTML interaktif dan pembungkus Streamlit lokal: tanggal, provinsi, tingkat prioritas, Top 10, marker, heatmap, poligon kab/kota, rincian kontribusi, dan aktivitas tujuh hari.
+- Dashboard Tableau dipublikasikan untuk review: [FIRELINE Priority Dashboard](https://prod-apsoutheast-c.online.tableau.com/t/evanluis198-ff55726322/views/dsa/FIRELINEPriorityDashboard). Isinya peta hotspot, tren bulanan, Top 10, serta filter provinsi, bulan observasi, dan tingkat prioritas.
+- Tooltip marker Tableau menampilkan area/grid, prioritas, skor, jumlah observasi, hari aktif 7 hari, FRP median, koordinat, sekolah terdekat dan jarak, waktu observasi terakhir, sumber, serta caveat luas terdampak belum tersedia. HTML memberi detail yang lebih lengkap dalam panel setelah marker atau baris Top 10 dipilih; perbedaan ini dicatat sebagai batas format Tableau, bukan perbedaan sumber atau skor.
 - Dokumentasi definisi data, formula, batas interpretasi, sumber, dan pengujian.
 - Arsip Maria dipertahankan di `legacy/`; notebook sumber Kaka untuk HTML tidak ditemukan sehingga proses dibuat ulang, bukan mengklaim mereproduksi notebook Kaka.
 
@@ -43,6 +45,20 @@ Riwayat repo yang diperiksa: main `5a962314d4d370b3daf505cdfaf6f1b50ed23903`, ed
 3. **Sumber geometri kab/kota:** asal dan tahun versi Kaka belum tercantum. Sebanyak 56 area-hari belum memperoleh label kab/kota. BIG tetap acuan penyaringan scope.
 4. **Makna jarak:** saat ini jarak ke sekolah, bukan jarak dari warga. Bila keputusan UX meminta jarak pengguna, perlu penyamaan definisi; tidak boleh diganti diam-diam.
 5. **Batas waktu:** data berakhir Mei 2026. Dataset historis ini tidak dapat dipakai untuk mengaku kondisi terkini atau memvalidasi laporan baru. Urutan akhir hari juga bukan simulasi real-time; belum ada timestamp penerimaan data.
+
+## Kesesuaian dengan UX Figma
+
+Alur utamanya sudah sama: pengguna memilih tanggal/wilayah, melihat peta dan urutan prioritas, lalu membuka detail titik. HTML paling dekat dengan rancangan detail karena menampilkan status risiko, alasan kontribusi skor, koordinat, waktu terakhir, kualitas deteksi, konteks sekolah, dan sumber. Tableau berfungsi sebagai dashboard analitik; tooltip-nya memuat nilai inti yang sama tetapi tidak menampilkan jarak dari lokasi pengguna atau nama kecamatan.
+
+Jarak yang tersedia adalah jarak garis lurus ke sekolah terdekat, bukan jarak ke perangkat pengguna. Nama kecamatan, geolokasi warga, laporan warga, notifikasi, dan luas terdampak belum ada di dataset utama sehingga tidak boleh ditampilkan seolah-olah sudah tersedia.
+
+## Jawaban untuk pertanyaan Ryan / alignment case study
+
+- **Sumber data:** checkpoint ini memakai snapshot dataset FIRMS yang disediakan proyek sebagai sumber utama. BIG dipakai untuk batas wilayah dan dataset sekolah Kaggle hanya sebagai konteks. NASA FIRMS dan BMKG belum diintegrasikan sebagai API/live feed; karena itu dashboard tidak mengklaim kondisi terkini.
+- **Risk scoring:** DSA menetapkan definisi unit, komponen, bobot 40%/35%/25%, dan aturan P1/P2/P3 untuk prototipe; implementasi sistem hanya menjalankan aturan deterministik tersebut. Ini bukan model prediktif dan bukan keputusan operasional otomatis.
+- **Peta:** HTML memakai Leaflet dengan basemap CARTO; Tableau memakai peta native Tableau. Provider peta hanya untuk visualisasi dan tidak mengubah data, skor, atau ranking.
+- **Klik titik:** HTML menampilkan panel detail lengkap. Tableau menampilkan tooltip dengan nilai inti yang sama (area, prioritas, skor, observasi, persistensi, FRP, koordinat, sekolah, waktu, sumber, dan caveat luas terdampak), tetapi tidak meniru panel kontribusi HTML satu per satu.
+- **Laporan warga/relawan:** belum menjadi input pada checkpoint ini. Jika fitur tersebut ditambahkan, laporan warga menjadi sinyal yang didispatch ke relawan untuk verifikasi; bukan langsung dianggap bukti kebakaran.
 
 ## Batas klaim yang sengaja dipertahankan
 

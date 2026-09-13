@@ -9,3 +9,4 @@ nbconvert>=7,<8
 ipykernel>=6,<8
 streamlit==1.63.0
 pytest>=8,<10
+huggingface_hub>=0.27,<1
