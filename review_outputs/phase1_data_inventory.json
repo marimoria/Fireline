@@ -1,0 +1,354 @@
+{
+  "directory": "C:\\Users\\Inaka\\Downloads\\Fireline-checkpoint3\\Fireline-checkpoint3\\data\\additions",
+  "boundaries": [
+    {
+      "file": "Provinsi Kalimantan Barat-KAB_KOTA.geojson",
+      "type": "GeoJSON",
+      "bytes": 15297748,
+      "sha256": "281451c2b73fbf5025c56316ad02302a9eb282f3bd33ceb1da7274330346e998",
+      "features": 14,
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "MultiPolygon"
+      ],
+      "invalid_geometries": 0,
+      "empty_geometries": 0,
+      "columns": [
+        "kode_kk",
+        "kode_prov",
+        "kab_kota",
+        "provinsi",
+        "fid",
+        "nama",
+        "label"
+      ],
+      "first_property_values": [
+        "61.01",
+        "61.02",
+        "61.03",
+        "61.04",
+        "61.05",
+        "61.06",
+        "61.07",
+        "61.08",
+        "61.09",
+        "61.10"
+      ]
+    },
+    {
+      "file": "Provinsi Kalimantan Selatan-KAB_KOTA.geojson",
+      "type": "GeoJSON",
+      "bytes": 3634403,
+      "sha256": "5eaf5abd0da69a9d27d2e40ee4ce8454f41626474217faebe1eba632e4c104d6",
+      "features": 13,
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "MultiPolygon"
+      ],
+      "invalid_geometries": 0,
+      "empty_geometries": 0,
+      "columns": [
+        "kode_kk",
+        "kode_prov",
+        "kab_kota",
+        "provinsi",
+        "fid",
+        "nama",
+        "label"
+      ],
+      "first_property_values": [
+        "63.01",
+        "63.02",
+        "63.03",
+        "63.04",
+        "63.05",
+        "63.06",
+        "63.07",
+        "63.08",
+        "63.09",
+        "63.10"
+      ]
+    },
+    {
+      "file": "Provinsi Kalimantan Tengah-KAB_KOTA.geojson",
+      "type": "GeoJSON",
+      "bytes": 2919077,
+      "sha256": "c42bd23e19bbb8758749b8fe44b66a1545baa8135b066d889637c15edb5663cf",
+      "features": 14,
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "MultiPolygon"
+      ],
+      "invalid_geometries": 0,
+      "empty_geometries": 0,
+      "columns": [
+        "kode_kk",
+        "kode_prov",
+        "kab_kota",
+        "provinsi",
+        "fid",
+        "nama",
+        "label"
+      ],
+      "first_property_values": [
+        "62.01",
+        "62.02",
+        "62.03",
+        "62.04",
+        "62.05",
+        "62.06",
+        "62.07",
+        "62.08",
+        "62.09",
+        "62.10"
+      ]
+    },
+    {
+      "file": "Provinsi Kalimantan Timur-KAB_KOTA.geojson",
+      "type": "GeoJSON",
+      "bytes": 15184575,
+      "sha256": "df89c26d7ce054ec1f390d2a52fa050625c853c3ccf45bc8fbfb47d52a6b877c",
+      "features": 10,
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "MultiPolygon"
+      ],
+      "invalid_geometries": 0,
+      "empty_geometries": 0,
+      "columns": [
+        "kode_kk",
+        "kode_prov",
+        "kab_kota",
+        "provinsi",
+        "fid",
+        "nama",
+        "label"
+      ],
+      "first_property_values": [
+        "64.01",
+        "64.02",
+        "64.03",
+        "64.07",
+        "64.08",
+        "64.09",
+        "64.11",
+        "64.71",
+        "64.72",
+        "64.74"
+      ]
+    },
+    {
+      "file": "Provinsi Kalimantan Utara-KAB_KOTA.geojson",
+      "type": "GeoJSON",
+      "bytes": 2646964,
+      "sha256": "fdc59f685c71bbf7d384030cb895faba423bdac3a3c9dc31c6c47e3cdeeb7e48",
+      "features": 5,
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "MultiPolygon"
+      ],
+      "invalid_geometries": 0,
+      "empty_geometries": 0,
+      "columns": [
+        "kode_kk",
+        "kode_prov",
+        "kab_kota",
+        "provinsi",
+        "fid",
+        "nama",
+        "label"
+      ],
+      "first_property_values": [
+        "65.01",
+        "65.02",
+        "65.03",
+        "65.04",
+        "65.71"
+      ]
+    }
+  ],
+  "population": [
+    {
+      "file": "Jumlah Penduduk menurut Kabupaten_Kota di Provinsi Kalimantan Timur, 2024.csv",
+      "type": "CSV",
+      "bytes": 309,
+      "sha256": "9dbaf2db9ad5fb42634bcec5d208b5b3fe09d6ea37217a4609c031527e7208a1",
+      "rows_including_header": 14,
+      "columns": [
+        "Kabupaten/Kota",
+        ""
+      ],
+      "sample_rows": [
+        [
+          "",
+          "Jumlah Penduduk menurut Kabupaten/Kota di Provinsi Kalimantan Timur (Ribu)"
+        ],
+        [
+          "",
+          "2024"
+        ],
+        [
+          "Paser",
+          "286.99"
+        ]
+      ]
+    },
+    {
+      "file": "Jumlah Penduduk Menurut Kabupaten_Kota, 2024.csv",
+      "type": "CSV",
+      "bytes": 328,
+      "sha256": "9df2b10def456a6febe763c60b7cc9df00689d34b280b6d49ceae3e589db91f2",
+      "rows_including_header": 18,
+      "columns": [
+        "Kab/Kota",
+        ""
+      ],
+      "sample_rows": [
+        [
+          "",
+          "Jumlah Penduduk Menurut Kabupaten/Kota (Jiwa)"
+        ],
+        [
+          "",
+          "2024"
+        ],
+        [
+          "Kalimantan Barat",
+          "5695475"
+        ]
+      ]
+    },
+    {
+      "file": "Penduduk, Laju Pertumbuhan Penduduk, Distribusi Persentase Penduduk Kepadatan Penduduk, Rasio Jenis Kelamin Penduduk Menurut Kabupaten_Kota di Provinsi Kalimantan Selatan, 2024.csv",
+      "type": "CSV",
+      "bytes": 1348,
+      "sha256": "9b760daf1fbe4b5cde9f6bcc44a1a562c35b6d380a7f1bd97ecbb8cce5767db2",
+      "rows_including_header": 18,
+      "columns": [
+        "Kabupaten/Kota",
+        "Jumlah Penduduk (Ribu)",
+        "Laju Pertumbuhan Penduduk per Tahun",
+        "Persentase Penduduk",
+        "Kepadatan Penduduk per km persegi (Km2)",
+        "Rasio Jenis Kelamin Penduduk"
+      ],
+      "sample_rows": [
+        [
+          "Tanah Laut",
+          "365",
+          "1.12",
+          "8.54",
+          "95",
+          "104.6"
+        ],
+        [
+          "Kota Baru",
+          "343.7",
+          "1.36",
+          "8.04",
+          "36",
+          "105.9"
+        ],
+        [
+          "Banjar",
+          "600.6",
+          "1.54",
+          "14.06",
+          "131",
+          "101.9"
+        ]
+      ]
+    },
+    {
+      "file": "Penduduk, Laju Pertumbuhan Penduduk, Distribusi Persentase Penduduk Kepadatan Penduduk, Rasio Jenis Kelamin Penduduk Menurut Kabupaten_Kota di Provinsi Kalimantan Utara, 2024.csv",
+      "type": "CSV",
+      "bytes": 1426,
+      "sha256": "76859b29ed4ac2dda69045cd9a19c5d60633ba039b1e5f6d44114b5354a8eb14",
+      "rows_including_header": 13,
+      "columns": [
+        "Kabupaten/Kota",
+        "Jumlah Penduduk (Ribu)",
+        "Laju Pertumbuhan Penduduk per Tahun",
+        "Persentase Penduduk",
+        "Kepadatan Penduduk per km persegi (Km2)",
+        "Rasio Jenis Kelamin Penduduk"
+      ],
+      "sample_rows": [
+        [
+          "Malinau",
+          "86.5",
+          "1.28",
+          "11.7",
+          "2",
+          "113.1"
+        ],
+        [
+          "Bulungan",
+          "160.2",
+          "1.45",
+          "21.66",
+          "12",
+          "113.4"
+        ],
+        [
+          "Tana Tidung",
+          "28.2",
+          "2.57",
+          "3.81",
+          "6",
+          "112.4"
+        ]
+      ]
+    },
+    {
+      "file": "jumlah-penduduk-menurut-kabupaten-kota-di-provinsi-kalimantan-tengah-ribu-2020-2025(1).xlsx",
+      "type": "XLSX",
+      "bytes": 10470,
+      "sha256": "1d3b7f3f7e6f54c552e76ff99fea81935dcaa0d89757399a499a15d2287c0b9f",
+      "sheets": [
+        {
+          "sheet": "Sheet1",
+          "rows": 24,
+          "columns": 5,
+          "sample_rows": [
+            [
+              "Tabel : Jumlah Penduduk Menurut Kabupaten/Kota di Provinsi Kalimantan Tengah (ribu), 2020-2025",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "",
+              "Kabupaten/KotaRegency/Municipality",
+              "2020¹",
+              "2024²",
+              "2025²"
+            ],
+            [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "",
+              "Kabupaten/Regency",
+              "",
+              "",
+              ""
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
