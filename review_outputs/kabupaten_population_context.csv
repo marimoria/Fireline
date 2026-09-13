@@ -1,18 +1,18 @@
 kabupaten_code,province_code,kabupaten_name,population,population_density,population_year,_merge
-61.01,61,Sambas,,,,left_only
-61.02,61,Mempawah,,,,left_only
-61.03,61,Sanggau,,,,left_only
-61.04,61,Ketapang,,,,left_only
-61.05,61,Sintang,,,,left_only
-61.06,61,Kapuas Hulu,,,,left_only
-61.07,61,Bengkayang,,,,left_only
-61.08,61,Landak,,,,left_only
-61.09,61,Sekadau,,,,left_only
-61.10,61,Melawi,,,,left_only
-61.11,61,Kayong Utara,,,,left_only
-61.12,61,Kubu Raya,,,,left_only
-61.71,61,Kota Pontianak,,,,left_only
-61.72,61,Kota Singkawang,,,,left_only
+61.01,61,Sambas,654912.0,,2024.0,both
+61.02,61,Mempawah,316728.0,,2024.0,both
+61.03,61,Sanggau,510412.0,,2024.0,both
+61.04,61,Ketapang,599890.0,,2024.0,both
+61.05,61,Sintang,443684.0,,2024.0,both
+61.06,61,Kapuas Hulu,265772.0,,2024.0,both
+61.07,61,Bengkayang,303422.0,,2024.0,both
+61.08,61,Landak,419092.0,,2024.0,both
+61.09,61,Sekadau,222510.0,,2024.0,both
+61.10,61,Melawi,243250.0,,2024.0,both
+61.11,61,Kayong Utara,135087.0,,2024.0,both
+61.12,61,Kubu Raya,649866.0,,2024.0,both
+61.71,61,Kota Pontianak,680852.0,,2024.0,both
+61.72,61,Kota Singkawang,249998.0,,2024.0,both
 62.01,62,Kotawaringin Barat,282790.0,,2024.0,both
 62.02,62,Kotawaringin Timur,,,,left_only
 62.03,62,Kapuas,430180.0,,2024.0,both
