@@ -258,6 +258,9 @@ def build(config_path=None):
 
 
 if __name__=="__main__":
-    p=argparse.ArgumentParser();p.add_argument("--config");args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument("--config");p.add_argument("--fetch-dataset",action="store_true",help="Download dataset dari Hugging Face sebelum menjalankan pipeline");p.add_argument("--dataset-output",default="data");p.add_argument("--hf-token",default=None);args=p.parse_args()
+    if args.fetch_dataset:
+        from fetch_fireline_dataset import fetch_dataset
+        fetch_dataset(args.dataset_output,args.hf_token)
     summary,_=build(args.config)
     print(json.dumps(summary,ensure_ascii=False,indent=2,default=int))
