@@ -1,6 +1,6 @@
 # Laporan Review Lokal FIRELINE
 
-Tanggal: 13 September 2026. Status: implementasi prototipe fitur Mapping selesai untuk review; siap dipush ke branch `checkpoint3`, belum produk operasional.
+Tanggal: 13 September 2026. Status: implementasi prototipe fitur Mapping selesai dan sudah dipush ke branch `checkpoint3`; belum produk operasional.
 
 ## Yang sudah dikerjakan
 
@@ -68,4 +68,4 @@ Tidak menyimpulkan verifikasi 12–24 jam dari jam lintasan satelit. Tidak menyi
 
 CSV mentah/hasil, konfigurasi jalur lokal, cache, payload HTML, dan naskah pribadi tidak dipush. Notebook, modul yang dibutuhkan, template dashboard, tes, serta dokumentasi dapat dipertimbangkan setelah review. HTML keluaran menyematkan data lokasi sehingga dikecualikan dari Git secara default. Tidak ada file mirror `.py` dari kedua notebook.
 
-Lihat `QA_REPORT.md` untuk hasil pengujian. Perubahan lokal bisa diperiksa pada branch `checkpoint3-dsa-priority-map`; branch remote dan berkas kerja lama di luar paket ini tidak diubah.
+Lihat `QA_REPORT.md` untuk hasil pengujian. Commit final `ebd4129` tersedia di branch remote `checkpoint3`; berkas kerja lama di luar paket ini tidak diubah.

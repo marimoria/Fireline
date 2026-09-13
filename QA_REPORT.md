@@ -47,4 +47,4 @@ Catatan UX: nomor di wilayah padat dapat bertumpuk pada zoom seluruh Kalimantan;
 
 ## Pengamanan handoff
 
-Tidak ada push/merge remote. File CSV, payload data, HTML keluaran, cache, dan konfigurasi lokal masuk daftar pengecualian Git. File lama dipindahkan ke arsip lokal dengan riwayat asal tetap tersedia. Sebelum publikasi, lakukan review sumber/lisensi geometri serta dataset sekolah dan review angka dalam notebook.
+Commit final `ebd4129` sudah dipush ke branch `checkpoint3`. File CSV, payload data, HTML keluaran, cache, dan konfigurasi lokal masuk daftar pengecualian Git. File lama dipindahkan ke arsip lokal dengan riwayat asal tetap tersedia. Sebelum rilis operasional, lakukan review sumber/lisensi geometri serta dataset sekolah dan review angka dalam notebook.
