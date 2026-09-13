@@ -1,0 +1,25 @@
+{
+  "controls": [
+    "date",
+    "province_code",
+    "kabupaten_code",
+    "priority_level"
+  ],
+  "cascade": {
+    "province_code": "filters kabupaten_code options",
+    "kabupaten_code": "filters grid rows"
+  },
+  "reset": {
+    "date": "default demo date",
+    "province_code": "",
+    "kabupaten_code": "",
+    "priority_level": ""
+  },
+  "selection": {
+    "polygon_click": "sets kabupaten_code",
+    "marker_click": "opens grid detail",
+    "clear_kabupaten": "returns to province scope"
+  },
+  "empty_state": "No data is not interpreted as safe or risk-free.",
+  "score_rule": "Filtering does not recalculate priority percentiles."
+}
