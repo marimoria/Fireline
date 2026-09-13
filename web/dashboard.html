@@ -16,6 +16,7 @@
 <section class="filters" aria-label="Filter peta">
 <div class="field"><label for="date">Tanggal observasi (UTC)</label><input id="date" type="date"></div>
 <div class="field"><label for="province">Wilayah provinsi</label><select id="province"><option value="">Seluruh Kalimantan</option></select></div>
+<div class="field"><label for="kabupaten">Kabupaten/kota</label><select id="kabupaten"><option value="">Semua kabupaten/kota</option></select></div>
 <div class="field"><label for="level">Tingkat prioritas pemantauan</label><select id="level"><option value="">Semua tingkat</option><option value="P1">P1 · skor ≥ 80</option><option value="P2">P2 · skor 60–&lt;80</option><option value="P3">P3 · skor &lt;60</option></select></div>
 <button id="reset" type="button">Reset demo</button>
 </section><div class="date-help" id="date-help"></div>
@@ -52,6 +53,7 @@ const levelText=l=>({P1:'Perhatian paling tinggi',P2:'Perhatian meningkat',P3:'T
 let current=[],selected=null,map=null,circles=null,numbers=null,choropleth=null,heat=null,selection=null;
 el('date').min=meta.date_start;el('date').max=meta.date_end;el('date').value=meta.demo_date;
 for(const p of [...new Set(rows.map(r=>r.province_name))].sort()){const o=document.createElement('option');o.value=p;o.textContent=p;el('province').appendChild(o);}
+function updateKabupatenOptions(){const selected=el('kabupaten').value,p=el('province').value;const names=[...new Set(rows.filter(r=>!p||r.province_name===p).map(r=>r.region_name).filter(Boolean))].sort();el('kabupaten').innerHTML='<option value="">Semua kabupaten/kota</option>'+names.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');if(names.includes(selected))el('kabupaten').value=selected;}
 el('date-help').textContent=`Data ${meta.date_start} – ${meta.date_end}. Demo dibuka pada hari observasi terbanyak (${meta.demo_date}); bukan kondisi hari ini. Tanggal tanpa deteksi bukan bukti wilayah aman atau satelit memantau penuh.`;
 if(window.L){
  map=L.map('map',{preferCanvas:true}).setView([.1,114],6);
@@ -82,8 +84,8 @@ function drawTrend(){
  el('trend').innerHTML=`<svg viewBox="0 0 630 160" role="img" aria-label="Observasi tujuh hari: ${days.map((d,i)=>d+': '+counts[i]).join(', ')}">${days.map((d,i)=>{const h=counts[i]/max*98,x=15+i*89;return `<rect x="${x}" y="${121-h}" width="54" height="${h}" rx="3" fill="${i===6?'#244d40':'#becd9e'}"></rect><text x="${x+27}" y="${115-h}" text-anchor="middle" font-size="11" fill="#244d40">${fmt(counts[i])}</text><text x="${x+27}" y="142" text-anchor="middle" font-size="10" fill="#627376">${d.slice(5)}</text>`;}).join('')}</svg><div class="small muted">Hari sebelum ${meta.date_start} berada di luar cakupan berkas. Nol berarti tidak ada observasi dalam berkas; cakupan sensor harian tidak tersedia.</div>`;
 }
 function update(){
- const d=el('date').value,p=el('province').value,l=el('level').value;
- current=rows.filter(r=>r.date===d&&(!p||r.province_name===p)&&(!l||r.priority_level===l)).sort((a,b)=>b.priority_score-a.priority_score||(a.grid_id<b.grid_id?-1:a.grid_id>b.grid_id?1:0));
+ const d=el('date').value,p=el('province').value,k=el('kabupaten').value,l=el('level').value;
+ current=rows.filter(r=>r.date===d&&(!p||r.province_name===p)&&(!k||r.region_name===k)&&(!l||r.priority_level===l)).sort((a,b)=>b.priority_score-a.priority_score||(a.grid_id<b.grid_id?-1:a.grid_id>b.grid_id?1:0));
  selected=null;
  el('k-observations').textContent=fmt(current.reduce((s,r)=>s+r.detection_count,0));el('k-areas').textContent=fmt(current.length);el('k-p1').textContent=fmt(current.filter(r=>r.priority_level==='P1').length);
  const values=current.map(r=>r.frp_median_mw).filter(v=>v!=null).sort((a,b)=>a-b),n=values.length;
@@ -102,7 +104,7 @@ function update(){
 }
 el('method').innerHTML=`<p><b>Unit:</b> grid 0,1° × tanggal UTC. Hari aktif menghitung kemunculan observasi pada tanggal yang berbeda, termasuk hari terpilih. Tidak membuktikan api menyala terus.</p><p><b>Skor:</b> 40% persentil jumlah deteksi harian + 35% proporsi hari aktif (dibagi 7) + 25% persentil FRP median. Persentil memakai mid-rank; semua nilai sama mendapat 0,5, dan nilai nol mendapat 0. Skor serta batas P1/P2/P3 adalah aturan sementara, belum dikalibrasi terhadap label kejadian lapangan.</p><p><b>Ruang lingkup:</b> ${fmt(meta.raw_rows)} observasi mentah → ${fmt(meta.kalimantan_observations)} observasi di poligon BIG → ${fmt(meta.grid_day_rows)} grid-hari. ${fmt(meta.unmatched_polygon_rows)} baris tidak cocok dengan poligon dan disimpan dalam audit terpisah; penyebabnya tidak otomatis dianggap koordinat salah.</p><p><b>Batas peta:</b> ${esc(meta.region_note)} Perhitungan scope menggunakan poligon BIG asli; garis yang disederhanakan di layar hanya untuk tampilan.</p><p><b>Data historis:</b> tidak ada pengambilan data terbaru, pengiriman notifikasi, validasi laporan warga, atau luas terdampak pada prototipe ini. Jam satelit adalah waktu observasi, tidak mengukur waktu verifikasi lapangan.</p><p><b>Sensitivitas Top 10:</b> rata-rata Jaccard varian bobot sama = ${fmt(meta.sensitivity.find(s=>s.variant==='equal_three')?.mean_top10_jaccard,3)} pada hari dengan lebih dari 10 area. Nilai 1 berarti anggotanya sama; ini uji kestabilan, bukan akurasi.</p><p><a href="https://firms.modaps.eosdis.nasa.gov/active_fire/" target="_blank" rel="noopener">NASA FIRMS</a> · <a href="https://geoservices.big.go.id/gis/rest/services/STIG/Batas_Provinsi/MapServer" target="_blank" rel="noopener">BIG batas provinsi</a> · <a href="https://www.kaggle.com/datasets/marchotridyo/indonesia-school-dataset-with-province-data" target="_blank" rel="noopener">Referensi sekolah</a></p>`;
 el('footer').textContent=`FIRELINE / ${meta.version} · Dibangun ${meta.generated_at_utc} · Dataset terakhir ${meta.date_end} UTC · Prototipe DSA untuk review PMA/UX`;
-['date','province','level'].forEach(id=>el(id).addEventListener('change',update));el('fit').addEventListener('click',fitMap);
-el('reset').addEventListener('click',()=>{el('date').value=meta.demo_date;el('province').value='';el('level').value='';update();fitMap();});update();fitMap();
+el('date').addEventListener('change',update);el('province').addEventListener('change',()=>{updateKabupatenOptions();el('kabupaten').value='';update();});el('kabupaten').addEventListener('change',update);el('level').addEventListener('change',update);el('fit').addEventListener('click',fitMap);
+el('reset').addEventListener('click',()=>{el('date').value=meta.demo_date;el('province').value='';el('kabupaten').value='';el('level').value='';updateKabupatenOptions();update();fitMap();});updateKabupatenOptions();update();fitMap();
 </script>
 </body></html>
