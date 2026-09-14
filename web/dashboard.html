@@ -2,42 +2,255 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FIRELINE · Peta Prioritas Pemantauan</title>
+<title>FIRELINE Peta Prioritas Pemantauan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-:root{--ink:#192e32;--muted:#627376;--line:#dce4df;--paper:#f4f6f1;--green:#244d40;--lime:#dcec9e;--p1:#ad382d;--p2:#b47920;--p3:#397d74}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 'Segoe UI',Arial,sans-serif}button,input,select{font:inherit}button,select{cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #2b85b8;outline-offset:3px}header{background:#173b32;color:white;padding:23px 32px;display:flex;justify-content:space-between;gap:20px;align-items:center}header strong{font-size:27px;letter-spacing:3px}header .sub{color:#c2d2c3;font-size:12px;margin-top:3px}.badge{border:1px solid #a9c081;border-radius:20px;color:#def0b4;padding:5px 13px;font-size:11px;letter-spacing:1.1px}main{max-width:1600px;margin:auto;padding:25px 30px}h1{font-size:28px;line-height:1.2;margin:0 0 7px;font-weight:650;letter-spacing:-.8px}h2{font-size:17px;margin:0}h3{font-size:14px;margin:0 0 8px}.muted{color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}.intro{display:flex;align-items:start;justify-content:space-between;gap:22px;margin-bottom:20px}.intro p{margin:0;max-width:820px}.filters{display:flex;gap:16px;padding:17px 20px;background:white;border:1px solid var(--line);border-radius:12px;align-items:end;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:170px}.field label{font-size:11px;font-weight:650;color:#425954}input,select{background:#fafcf8;border:1px solid #cdd8cf;border-radius:6px;min-height:40px;padding:8px 10px;color:var(--ink);width:100%}.filters button,.plain{border:1px solid #cdd8cf;border-radius:6px;background:#f5f8ef;min-height:40px;padding:8px 15px;color:var(--green)}.date-help{font-size:11px;color:var(--muted);margin:7px 0 17px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}.card{border:1px solid var(--line);background:white;border-radius:10px;padding:15px 19px}.card b{display:block;font-size:28px;letter-spacing:-1px;line-height:1.4}.card small{color:var(--muted);font-size:11px}.card .eyebrow{color:var(--muted)}.workspace{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr);gap:18px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden}.panel-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-head p{margin:2px 0 0;font-size:11px;color:var(--muted)}#map{height:525px;background:#e6ece1}.map-footer{padding:10px 17px;color:var(--muted);font-size:11px;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.list-info{padding:10px 16px;background:#f7f9f3;font-size:11px;color:var(--muted)}#queue{max-height:440px;overflow:auto}.row{width:100%;border:0;border-bottom:1px solid #e8ece5;background:white;text-align:left;display:flex;gap:12px;align-items:center;padding:13px 16px;color:var(--ink)}.row:hover,.row.active{background:#f0f5e6}.rank{background:#edf2e7;border-radius:6px;width:27px;height:27px;display:grid;place-items:center;flex:none;font-weight:700;font-size:12px}.row-name{font-weight:650;display:block}.row-sub{display:block;font-size:10px;color:var(--muted)}.row-score{margin-left:auto;text-align:right;font-size:17px;font-weight:700}.pill{display:inline-block;border-radius:4px;background:#f1f4ef;font-size:10px;padding:2px 6px;font-weight:650}.row-score small{font-size:10px;display:block;color:var(--muted);font-weight:400}.detail{padding:18px}.detail-title{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}.detail-title b{font-size:19px}#detail-panel{margin-top:18px}.bars{display:grid;gap:10px;margin:15px 0}.bar-label{display:flex;justify-content:space-between;font-size:11px}.bar-track{height:6px;border-radius:5px;background:#e8eee5;margin-top:4px}.bar-fill{height:6px;background:#517950;border-radius:5px}.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.fact{padding:9px 10px;border:1px solid var(--line);border-radius:6px;font-size:12px}.fact span{display:block;font-size:10px;color:var(--muted)}.note{padding:10px 12px;border-left:3px solid #bccf8d;background:#f5f8ed;font-size:11px;color:#506246;margin-top:10px}.small{font-size:11px}.empty{padding:35px 18px;color:var(--muted)}.lower{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-top:18px}.chart-wrap{padding:16px 18px}.chart-wrap svg{display:block;width:100%;height:160px}details{padding:14px 18px}summary{cursor:pointer;font-weight:600}details p,details li{font-size:12px;color:var(--muted)}footer{font-size:11px;color:var(--muted);margin-top:21px;padding-bottom:10px}a{color:#236759}.top-marker{background:#244d40;border:2px solid white;border-radius:50%;color:white;text-align:center;line-height:25px;font-weight:700;box-shadow:0 2px 5px #0003}.leaflet-control-layers{font:11px 'Segoe UI',sans-serif}.leaflet-control-layers input{min-height:auto;width:auto}#network-note{color:#994732;background:#fff2e8;padding:10px 18px;display:none}.comparison{display:flex;justify-content:space-between;border-bottom:1px solid #e7ece1;padding:8px 0;font-size:12px}.grid-chip{font-size:10px;color:var(--muted)}
-@media(max-width:950px){.workspace,.lower{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}header{padding:18px}main{padding:20px 15px}.intro{display:block}.intro .badge{display:none}#map{height:440px}#queue{max-height:340px}}@media(max-width:480px){h1{font-size:24px}.card{padding:13px}.card b{font-size:24px}.facts{grid-template-columns:1fr}.filters{gap:10px}.field{min-width:130px}header .sub{font-size:10px}header strong{font-size:22px}}
-.date-control{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;gap:6px}.date-control input{min-width:0}.date-control button{padding:8px 5px}
+/* ================================================================
+   FIRELINE  Tableau-Style Design System
+   Primary: Teal #1C7A8A  Priority: Red/Amber/Green  Page: #F2F2F2
+   Font: Source Sans 3 (Google Fonts)
+   ================================================================ */
+:root{
+  --teal:#1C7A8A;--teal2:#3A9AAD;--teal3:#C5E6EB;
+  --p1:#C0392B;--p2:#D68910;--p3:#1E8449;
+  --page:#F2F2F2;--panel:#FFFFFF;
+  --border:#DCDCDC;--border-lite:#F0F0F0;
+  --ink:#1A1A1A;--muted:#5A5A5A;--label:#909090;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--page);color:var(--ink);font-family:'Source Sans 3','Segoe UI',Arial,sans-serif;font-size:16px;line-height:1.55}
+button,input,select{font:inherit}
+button,select{cursor:pointer}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* Header */
+header{background:#fff;border-bottom:3px solid var(--teal);padding:12px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.hdr-brand{font-size:22px;font-weight:700;color:var(--teal);letter-spacing:3px}
+.hdr-sub{font-size:13px;color:var(--label);margin-top:1px}
+.hdr-badge{border:1px solid var(--teal3);background:var(--teal3);border-radius:3px;color:var(--teal);padding:3px 10px;font-size:12px;letter-spacing:1.1px;font-weight:700}
+
+/* Main layout */
+main{max-width:1600px;margin:auto;padding:18px 24px}
+.page-eyebrow{font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:4px}
+h1{font-size:24px;font-weight:700;color:var(--ink);margin-bottom:3px;letter-spacing:-0.2px}
+.page-desc{font-size:15px;color:var(--muted);margin-bottom:16px}
+
+/* Filter bar */
+.filter-bar{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:11px 14px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px}
+.field{display:flex;flex-direction:column;gap:3px;flex:1;min-width:150px}
+.field label{font-size:12px;font-weight:700;color:var(--label);text-transform:uppercase;letter-spacing:0.8px}
+input,select{background:#FAFAFA;border:1px solid #C8C8C8;border-radius:2px;min-height:36px;padding:5px 10px;color:var(--ink);width:100%}
+select:hover,input:hover{border-color:var(--teal2)}
+.btn{border:1px solid #C8C8C8;border-radius:2px;background:#FAFAFA;min-height:36px;padding:5px 14px;color:var(--ink);font-weight:600;font-size:15px}
+.btn:hover{background:#EFEFEF}
+.date-ctrl{display:grid;grid-template-columns:34px 1fr 34px;gap:3px}
+.date-ctrl .btn{padding:5px 0;text-align:center}
+.date-help{font-size:13px;color:var(--label);margin-bottom:12px}
+
+/* KPI cards */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:14px 16px;border-top:3px solid var(--teal)}
+.kpi-label{font-size:12px;font-weight:700;color:var(--label);text-transform:uppercase;letter-spacing:0.9px;margin-bottom:6px}
+.kpi-value{font-size:30px;font-weight:700;color:var(--ink);line-height:1.1}
+.kpi-desc{font-size:13px;color:var(--label);margin-top:4px}
+
+/* Workspace grid */
+.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(290px,1fr);gap:12px;align-items:start}
+
+/* Sheet (panel) */
+.sheet{background:var(--panel);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.sheet-head{padding:10px 15px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sheet-title{font-size:15px;font-weight:700;color:var(--ink)}
+.sheet-sub{font-size:13px;color:var(--label);margin-top:2px}
+
+/* Map */
+#map{height:495px;background:#E4EDF2}
+.net-note{background:#FFF3E0;color:#7B3F25;padding:7px 14px;font-size:14px;display:none}
+
+/* Map legend */
+.map-legend{display:flex;align-items:center;gap:18px;padding:9px 15px;background:#FAFAFA;border-top:1px solid var(--border);flex-wrap:wrap}
+.leg-title{font-size:12px;font-weight:700;color:var(--label);text-transform:uppercase;letter-spacing:0.8px}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:14px}
+.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.leg-name{font-weight:700}
+.leg-desc{color:var(--muted);font-size:13px}
+
+/* Priority list */
+.list-bar{padding:7px 14px;font-size:13px;color:var(--label);background:#FAFAFA;border-bottom:1px solid var(--border)}
+#queue{max-height:424px;overflow:auto}
+.row{width:100%;border:0;border-bottom:1px solid var(--border-lite);background:var(--panel);text-align:left;display:flex;gap:10px;align-items:center;padding:11px 14px;color:var(--ink);cursor:pointer}
+.row:hover,.row.active{background:#EBF6F9}
+.rank-box{background:var(--teal);border-radius:2px;width:25px;height:25px;display:grid;place-items:center;flex:none;font-weight:700;font-size:13px;color:white}
+.row-name{font-weight:700;font-size:15px;display:block}
+.row-sub{display:block;font-size:13px;color:var(--muted)}
+.row-score{margin-left:auto;text-align:right;font-size:20px;font-weight:700}
+.row-score small{font-size:12px;display:block;color:var(--label);font-weight:400}
+.pill{display:inline-block;border-radius:2px;font-size:11px;padding:2px 7px;font-weight:700;color:white}
+
+/* Detail panel */
+.det{padding:15px}
+.det-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.det-name{font-size:19px;font-weight:700}
+.det-loc{font-size:13px;color:var(--muted);margin-top:3px}
+.det-score-num{font-size:26px;font-weight:700;text-align:right}
+.det-score-tag{text-align:right;font-size:13px;color:var(--label);margin-top:4px}
+.det-summary{font-size:15px;color:var(--muted);margin-bottom:14px}
+.section-lbl{font-size:12px;font-weight:700;color:var(--label);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:7px}
+
+/* Score bars */
+.bars{display:grid;gap:10px;margin-bottom:15px}
+.bar-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
+.bar-name{font-size:14px;font-weight:700}
+.bar-wt{font-size:13px;color:var(--label);font-weight:400;margin-left:6px}
+.bar-pts{font-size:14px;font-weight:700}
+.bar-pts-of{font-size:13px;color:var(--label);font-weight:400}
+.bar-track{height:7px;border-radius:2px;background:#ECECEC}
+.bar-fill{height:7px;border-radius:2px}
+
+/* Facts grid */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}
+.fact{padding:9px 11px;border:1px solid var(--border);border-radius:3px}
+.fact-lbl{display:block;font-size:11px;font-weight:700;color:var(--label);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px}
+.fact-val{font-size:15px;font-weight:600;color:var(--ink)}
+.fact-sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.fact-lim{background:#FFFCF0;border-color:#E0C840}
+.fact-lim .fact-val{color:#8A6820}
+
+/* Annotation */
+.note-box{padding:9px 12px;background:#F5F5F5;border-left:3px solid #C0C0C0;font-size:14px;color:var(--muted);margin-bottom:9px;border-radius:0 2px 2px 0}
+.src-line{font-size:13px;color:var(--label)}
+
+/* Lower section */
+.lower{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-top:12px}
+.chart-wrap{padding:14px 16px}
+.chart-y-title{font-size:12px;font-weight:700;color:var(--label);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:5px}
+.guide-wrap{padding:14px 15px}
+.guide-wrap p{font-size:14px;color:var(--muted);margin-bottom:8px}
+.guide-wrap strong{color:var(--ink)}
+
+/* Methodology accordion */
+details summary{cursor:pointer;font-weight:700;font-size:15px;padding:11px 15px;list-style:none;display:flex;align-items:center;gap:7px;color:var(--ink)}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:'▶';font-size:10px;color:var(--label)}
+details[open] summary::before{content:'▼'}
+.meth-wrap{padding:2px 15px 14px}
+.meth-wrap p{font-size:14px;color:var(--muted);margin-bottom:8px}
+.meth-wrap b{color:var(--ink)}
+
+/* Misc */
+.empty{padding:26px 14px;color:var(--muted);font-size:15px}
+footer{font-size:13px;color:var(--label);margin-top:16px;padding-bottom:8px}
+a{color:var(--teal)}
+.top-marker{background:var(--teal);border:2px solid white;border-radius:50%;color:white;text-align:center;line-height:27px;font-weight:700;font-size:13px;box-shadow:0 1px 5px rgba(0,0,0,.3);font-family:'Source Sans 3','Segoe UI',sans-serif}
+.leaflet-control-layers{font:13px 'Source Sans 3','Segoe UI',sans-serif}
+.leaflet-control-layers input{min-height:auto;width:auto}
+
+@media(max-width:960px){.workspace,.lower{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}header{padding:12px 16px}main{padding:14px 14px}#map{height:400px}#queue{max-height:300px}.facts{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.kpi-row{grid-template-columns:1fr 1fr}.kpi-value{font-size:22px}.facts{grid-template-columns:1fr}.hdr-badge{display:none}}
 </style>
 </head>
 <body>
-<header><div><strong>FIRELINE</strong><div class="sub">Peta prioritas pemantauan · Kalimantan</div></div><span class="badge">PROTOTIPE HISTORIS</span></header>
+<header>
+  <div>
+    <div class="hdr-brand">FIRELINE</div>
+    <div class="hdr-sub">Peta Prioritas Pemantauan  Kalimantan</div>
+  </div>
+  <span class="hdr-badge">PROTOTIPE HISTORIS</span>
+</header>
+
 <main>
-<div class="intro"><div><div class="eyebrow muted" style="margin-bottom:8px">Fitur 02 / Mapping</div><h1>Memahami sinyal. Menentukan perhatian.</h1><p class="muted">Jelajahi area yang terdeteksi satelit, lihat urutan prioritas dan alasan di baliknya.</p></div></div>
-<section class="filters" aria-label="Filter peta">
-<div class="field"><label for="mode">Mode historis</label><select id="mode"><option value="day">Hari tertentu</option><option value="all">Riwayat seluruh periode</option></select></div>
-<div class="field"><label for="date">Tanggal observasi (UTC)</label><div class="date-control"><button class="plain" id="prev-day" type="button">←</button><input id="date" type="date"><button class="plain" id="next-day" type="button">→</button></div></div>
-<div class="field"><label for="province">Wilayah provinsi</label><select id="province"><option value="">Seluruh Kalimantan</option></select></div>
-<div class="field"><label for="kabupaten">Kabupaten/kota</label><select id="kabupaten"><option value="">Semua kabupaten/kota</option></select></div>
-<div class="field"><label for="level">Tingkat prioritas pemantauan</label><select id="level"><option value="">Semua tingkat</option><option value="P1">P1 · skor ≥ 80</option><option value="P2">P2 · skor 60–&lt;80</option><option value="P3">P3 · skor &lt;60</option></select></div>
-<button id="reset" type="button">Reset demo</button>
-</section><div class="date-help" id="date-help"></div>
-<section class="cards" aria-label="Ringkasan hasil filter" aria-live="polite">
-<div class="card"><div class="eyebrow">Observasi satelit</div><b id="k-observations">—</b><small>Deteksi pada tanggal terpilih</small></div>
-<div class="card"><div class="eyebrow">Area pemantauan</div><b id="k-areas">—</b><small>Grid unik 0,1° yang aktif</small></div>
-<div class="card"><div class="eyebrow">Prioritas P1</div><b id="k-p1">—</b><small>Menurut aturan skor sementara</small></div>
-<div class="card"><div class="eyebrow">FRP median</div><b id="k-frp">—</b><small>Median FRP antararea · MW</small></div>
-</section>
-<p class="small muted">Nomor berdekatan dapat bertumpuk pada tampilan luas. Perbesar peta atau pilih area melalui daftar Top 10 untuk melihat lokasi tepatnya.</p>
-<div class="workspace">
-<section class="panel"><div class="panel-head"><div><h2>Sebaran & prioritas area</h2><p>Klik marker untuk membuka alasan prioritas</p></div><button class="plain" id="fit" type="button">Lihat semua</button></div><div id="network-note" role="status"></div><div id="map" aria-label="Peta area pemantauan"></div><div class="map-footer"><span><i class="dot" style="background:var(--p1)"></i>P1</span><span><i class="dot" style="background:var(--p2)"></i>P2</span><span><i class="dot" style="background:var(--p3)"></i>P3</span><span><i class="dot" style="background:#dce2d8"></i>Tanpa area terpilih</span><span>Poligon: rata-rata skor area terpilih.</span></div></section>
-<div><section class="panel"><div class="panel-head"><div><h2>10 area prioritas</h2><p>Urutan dari skor tertinggi pada hasil filter</p></div><span class="pill">AREA / HARI</span></div><div id="list-info" class="list-info"></div><div id="queue" aria-label="Daftar prioritas" aria-live="polite"></div></section></div>
-</div>
-<section class="panel" id="detail-panel"><div class="panel-head"><h2>Detail area & alasan prioritas</h2><span class="grid-chip">Sumber utama: NASA FIRMS · VIIRS NOAA-20</span></div><div id="detail" class="detail" aria-live="polite">Pilih area pada peta atau daftar.</div></section>
-<div class="lower"><section class="panel"><div class="panel-head"><div><h2>Aktivitas dalam tujuh hari</h2><p>Jumlah observasi · seluruh tingkat prioritas di provinsi terpilih</p></div></div><div class="chart-wrap" id="trend"></div></section><section class="panel"><div class="panel-head"><h2>Cara membaca peta</h2></div><div class="chart-wrap small"><p>Satu marker mewakili <b>satu grid pada satu tanggal</b>. Koordinatnya berasal dari observasi dengan FRP tertinggi di area itu.</p><p>Skor menjelaskan urutan perhatian relatif. P3 tetap dapat memerlukan perhatian. Tidak ada kategori “aman”.</p><p>Jarak sekolah adalah jarak garis lurus dari observasi representatif ke sekolah terdekat yang tersedia. Ini hanya konteks eksposur, bukan bobot skor.</p><p><b>Keterbatasan data:</b> Data luas area terdampak tidak tersedia di dataset utama (NASA FIRMS tidak menyediakan estimasi area). Ini adalah keterbatasan dataset, bukan nilai nol.</p><p class="muted">Heatmap menggabungkan kepadatan marker dan skor. Warnanya tidak menunjukkan luas atau batas kebakaran.</p></div></section></div>
-<section class="panel" style="margin-top:18px"><details><summary>Metodologi, sumber & keterbatasan</summary><div id="method"></div></details></section>
-<footer id="footer"></footer>
+  <div>
+    <div class="page-eyebrow">Fitur 02  Mapping</div>
+    <h1>Memahami Sinyal. Menentukan Perhatian.</h1>
+    <p class="page-desc">Jelajahi area yang terdeteksi satelit, lihat urutan prioritas dan alasan di baliknya.</p>
+  </div>
+
+  <section class="filter-bar" aria-label="Filter peta">
+    <div class="field"><label for="mode">Mode</label><select id="mode"><option value="day">Hari Tertentu</option><option value="all">Riwayat Seluruh Periode</option></select></div>
+    <div class="field"><label for="date">Tanggal Observasi</label><div class="date-ctrl"><button class="btn" id="prev-day" type="button">&#8592;</button><input id="date" type="date"><button class="btn" id="next-day" type="button">&#8594;</button></div></div>
+    <div class="field"><label for="province">Provinsi</label><select id="province"><option value="">Seluruh Kalimantan</option></select></div>
+    <div class="field"><label for="kabupaten">Kabupaten Kota</label><select id="kabupaten"><option value="">Semua Kabupaten</option></select></div>
+    <div class="field"><label for="level">Tingkat Prioritas</label><select id="level"><option value="">Semua Tingkat</option><option value="P1">P1  Skor 80 ke atas</option><option value="P2">P2  Skor 60 sampai 79</option><option value="P3">P3  Skor di bawah 60</option></select></div>
+    <button id="reset" type="button" class="btn">Reset</button>
+  </section>
+  <div class="date-help" id="date-help"></div>
+
+  <section class="kpi-row" aria-label="Ringkasan" aria-live="polite">
+    <div class="kpi"><div class="kpi-label">Observasi Satelit</div><div class="kpi-value" id="k-observations">&#8212;</div><div class="kpi-desc">Deteksi pada tanggal terpilih</div></div>
+    <div class="kpi"><div class="kpi-label">Area Pemantauan</div><div class="kpi-value" id="k-areas">&#8212;</div><div class="kpi-desc">Grid 0.1 derajat yang aktif</div></div>
+    <div class="kpi" style="border-top-color:var(--p1)"><div class="kpi-label">Prioritas P1</div><div class="kpi-value" id="k-p1" style="color:var(--p1)">&#8212;</div><div class="kpi-desc">Skor 80 ke atas</div></div>
+    <div class="kpi"><div class="kpi-label">FRP Median</div><div class="kpi-value" id="k-frp">&#8212;</div><div class="kpi-desc">Median FRP antar area dalam MW</div></div>
+  </section>
+
+  <p style="font-size:11px;color:var(--label);margin-bottom:10px">Nomor berdekatan dapat bertumpuk pada tampilan luas. Perbesar peta atau pilih area melalui daftar untuk melihat lokasi tepatnya.</p>
+
+  <div class="workspace">
+    <section class="sheet">
+      <div class="sheet-head">
+        <div><div class="sheet-title">Sebaran dan Prioritas Area</div><div class="sheet-sub">Klik marker untuk membuka alasan prioritas</div></div>
+        <button class="btn" id="fit" type="button">Lihat Semua</button>
+      </div>
+      <div class="net-note" id="network-note" role="status"></div>
+      <div id="map" aria-label="Peta area pemantauan"></div>
+      <div class="map-legend">
+        <span class="leg-title">Tingkat Prioritas</span>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--p1)"></div><span class="leg-name">P1</span><span class="leg-desc">Perhatian Paling Tinggi</span></div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--p2)"></div><span class="leg-name">P2</span><span class="leg-desc">Perhatian Meningkat</span></div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--p3)"></div><span class="leg-name">P3</span><span class="leg-desc">Tetap Dipantau</span></div>
+        <div class="leg-item"><div class="leg-dot" style="background:#C8C8C8"></div><span class="leg-desc">Tanpa Area Terpilih</span></div>
+        <span style="margin-left:auto;font-size:11px;color:var(--label)">Poligon menunjukkan rata-rata skor wilayah</span>
+      </div>
+    </section>
+
+    <div>
+      <section class="sheet">
+        <div class="sheet-head">
+          <div><div class="sheet-title">10 Area Prioritas</div><div class="sheet-sub">Urutan dari skor tertinggi pada hasil filter</div></div>
+          <span class="pill" style="background:var(--teal)">Area Per Hari</span>
+        </div>
+        <div id="list-bar" class="list-bar"></div>
+        <div id="queue" aria-label="Daftar prioritas" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="sheet" id="detail-panel" style="margin-top:12px">
+    <div class="sheet-head">
+      <div><div class="sheet-title">Detail Area dan Alasan Prioritas</div><div class="sheet-sub">Sumber Utama  NASA FIRMS  VIIRS NOAA-20</div></div>
+    </div>
+    <div id="detail" aria-live="polite"><div class="empty">Pilih area pada peta atau daftar.</div></div>
+  </section>
+
+  <div class="lower">
+    <section class="sheet">
+      <div class="sheet-head"><div><div class="sheet-title">Aktivitas Tujuh Hari Terakhir</div><div class="sheet-sub">Jumlah observasi di seluruh tingkat prioritas pada provinsi terpilih</div></div></div>
+      <div class="chart-wrap" id="trend"></div>
+    </section>
+    <section class="sheet">
+      <div class="sheet-head"><div class="sheet-title">Cara Membaca Peta</div></div>
+      <div class="guide-wrap">
+        <p>Satu marker mewakili <strong>satu grid pada satu tanggal</strong>. Koordinatnya berasal dari observasi dengan FRP tertinggi di area itu.</p>
+        <p>Skor menjelaskan urutan perhatian relatif. P3 tetap dapat memerlukan perhatian. Tidak ada kategori aman.</p>
+        <p>Jarak sekolah adalah jarak garis lurus ke sekolah terdekat yang tersedia. Ini hanya konteks eksposur, bukan bobot skor.</p>
+        <p><strong>Keterbatasan Data.</strong> Data luas area terdampak tidak tersedia di dataset utama. NASA FIRMS tidak menyediakan estimasi area per deteksi. Ini keterbatasan dataset, bukan nilai nol.</p>
+        <p style="color:var(--label)">Heatmap menggabungkan kepadatan marker dan skor. Warnanya tidak menunjukkan luas atau batas kebakaran.</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="sheet" style="margin-top:12px">
+    <details>
+      <summary>Metodologi, Sumber dan Keterbatasan</summary>
+      <div class="meth-wrap" id="method"></div>
+    </details>
+  </section>
+
+  <footer id="footer"></footer>
 </main>
+
 <script id="fireline-data" type="application/json">__FIRELINE_DATA__</script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
@@ -48,67 +261,209 @@ const meta=payload.summary;
 const rows=payload.rows.map(a=>Object.fromEntries(payload.columns.map((k,i)=>[k,a[i]])));
 const el=id=>document.getElementById(id);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmt=(v,d=0)=>v==null?'Tidak tersedia':Number(v).toLocaleString('id-ID',{maximumFractionDigits:d,minimumFractionDigits:d});
-const color=level=>({P1:'#ad382d',P2:'#b47920',P3:'#397d74'})[level];
+const fmt=(v,d=0)=>v==null?'Tidak Tersedia':Number(v).toLocaleString('id-ID',{maximumFractionDigits:d,minimumFractionDigits:d});
+const color=lv=>({P1:'#C0392B',P2:'#D68910',P3:'#1E8449'})[lv]||'#999';
 const scoreColor=s=>s>=80?color('P1'):s>=60?color('P2'):color('P3');
-const levelText=l=>({P1:'Perhatian paling tinggi',P2:'Perhatian meningkat',P3:'Tetap dipantau'})[l];
+const levelText=l=>({P1:'Perhatian Paling Tinggi',P2:'Perhatian Meningkat',P3:'Tetap Dipantau'})[l]||'';
 let current=[],selected=null,map=null,circles=null,numbers=null,choropleth=null,heat=null,selection=null;
-el('date').min=meta.date_start;el('date').max=meta.date_end;el('date').value=meta.demo_date;
-for(const p of [...new Set(rows.map(r=>r.province_name))].sort()){const o=document.createElement('option');o.value=p;o.textContent=p;el('province').appendChild(o);}
-function updateKabupatenOptions(){const selected=el('kabupaten').value,p=el('province').value;const names=[...new Set(rows.filter(r=>!p||r.province_name===p).map(r=>r.region_name).filter(Boolean))].sort();el('kabupaten').innerHTML='<option value="">Semua kabupaten/kota</option>'+names.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');if(names.includes(selected))el('kabupaten').value=selected;}
-el('date-help').textContent=`Data ${meta.date_start} – ${meta.date_end}. Demo dibuka pada hari observasi terbanyak (${meta.demo_date}); bukan kondisi hari ini. Tanggal tanpa deteksi bukan bukti wilayah aman atau satelit memantau penuh.`;
-function shiftDate(delta){const input=el('date');const d=new Date(input.value+'T00:00:00Z');if(Number.isNaN(d.getTime()))return;d.setUTCDate(d.getUTCDate()+delta);const value=d.toISOString().slice(0,10);if(value>=meta.date_start&&value<=meta.date_end){input.value=value;el('mode').value='day';update();}}
-if(window.L){
- map=L.map('map',{preferCanvas:true}).setView([.1,114],6);
- const base=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
- base.on('tileerror',()=>{el('network-note').style.display='block';el('network-note').textContent='Peta dasar belum berhasil dimuat. Data, batas wilayah, dan daftar tetap dapat dibaca.';});
- circles=L.layerGroup().addTo(map);numbers=L.layerGroup().addTo(map);selection=L.layerGroup().addTo(map);
- choropleth=L.geoJSON(payload.boundaries,{style:()=>({weight:.7,color:'#758d7c',fillColor:'#dce2d8',fillOpacity:.55})}).addTo(map);
- const overlays={'Rata-rata skor kab/kota':choropleth,'Area observasi':circles,'Nomor Top 10':numbers};
- if(L.heatLayer){heat=L.heatLayer([],{radius:22,blur:18,max:1,gradient:{.2:'#7aaf7c',.5:'#e8bd57',1:'#aa392e'}});overlays['Heatmap kepadatan × skor']=heat;}
- L.control.layers(null,overlays,{collapsed:true}).addTo(map);
-}else{el('map').innerHTML='<div class="empty">Peta membutuhkan koneksi untuk memuat pustaka Leaflet. Filter, daftar prioritas dan detail di bawah tetap dapat digunakan.</div>';}
 
-function rowButton(r,rank){return `<button type="button" class="row ${selected===r.grid_id?'active':''}" data-grid="${esc(r.grid_id)}"><span class="rank">${rank}</span><span><span class="row-name">${esc(r.region_name)}</span><span class="row-sub">${esc(r.province_name)} · grid ${esc(r.grid_id)}</span><span class="row-sub">${fmt(r.detection_count)} observasi · aktif ${r.active_days_7d}/7 hari</span></span><span class="row-score" style="color:${color(r.priority_level)}">${fmt(r.priority_score,1)}<small>${r.priority_level} · /100</small></span></button>`;}
-function drawQueue(){el('queue').innerHTML=current.length?current.slice(0,10).map((r,i)=>rowButton(r,i+1)).join(''):'<div class="empty">Tidak ada area untuk kombinasi filter ini. Coba tanggal atau wilayah lain.</div>';el('queue').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.grid,true)));}
-function fitMap(){if(map&&current.length)map.fitBounds(current.map(r=>[r.latitude,r.longitude]),{padding:[30,30],maxZoom:9});else if(map)map.setView([.1,114],6);}
-function localTime(r){const wib=['Kalimantan Barat','Kalimantan Tengah'].includes(r.province_name);return new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short',timeZone:wib?'Asia/Jakarta':'Asia/Makassar'}).format(new Date(r.last_seen_utc))+(wib?' WIB':' WITA');}
+el('date').min=meta.date_start;el('date').max=meta.date_end;el('date').value=meta.demo_date;
+for(const p of[...new Set(rows.map(r=>r.province_name))].sort()){const o=document.createElement('option');o.value=p;o.textContent=p;el('province').appendChild(o);}
+
+function updateKab(){
+  const sv=el('kabupaten').value,p=el('province').value;
+  const ns=[...new Set(rows.filter(r=>!p||r.province_name===p).map(r=>r.region_name).filter(Boolean))].sort();
+  el('kabupaten').innerHTML='<option value="">Semua Kabupaten</option>'+ns.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');
+  if(ns.includes(sv))el('kabupaten').value=sv;
+}
+
+el('date-help').textContent=`Data dari ${meta.date_start} sampai ${meta.date_end}. Demo dibuka pada hari observasi terbanyak yaitu ${meta.demo_date}. Tanggal tanpa deteksi bukan bukti wilayah aman.`;
+
+function shiftDate(d){
+  const inp=el('date');const dt=new Date(inp.value+'T00:00:00Z');if(isNaN(dt))return;
+  dt.setUTCDate(dt.getUTCDate()+d);const v=dt.toISOString().slice(0,10);
+  if(v>=meta.date_start&&v<=meta.date_end){inp.value=v;el('mode').value='day';update();}
+}
+
+if(window.L){
+  map=L.map('map',{preferCanvas:true}).setView([.1,114],6);
+  const base=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  base.on('tileerror',()=>{el('network-note').style.display='block';el('network-note').textContent='Peta dasar belum berhasil dimuat. Data dan daftar tetap dapat dibaca.';});
+  circles=L.layerGroup().addTo(map);numbers=L.layerGroup().addTo(map);selection=L.layerGroup().addTo(map);
+  choropleth=L.geoJSON(payload.boundaries,{style:()=>({weight:.8,color:'#AAAAAA',fillColor:'#DDDDDD',fillOpacity:.3})}).addTo(map);
+  const overlays={'Rata-rata Skor Wilayah':choropleth,'Area Observasi':circles,'Nomor Top 10':numbers};
+  if(L.heatLayer){heat=L.heatLayer([],{radius:22,blur:18,max:1,gradient:{.2:'#7EB8C4',.5:'#D68910',1:'#C0392B'}});overlays['Heatmap Kepadatan']=heat;}
+  L.control.layers(null,overlays,{collapsed:true}).addTo(map);
+}else{
+  el('map').innerHTML='<div class="empty">Peta membutuhkan koneksi untuk memuat pustaka Leaflet. Filter, daftar dan detail tetap dapat digunakan.</div>';
+}
+
+function rowBtn(r,rank){
+  return `<button type="button" class="row ${selected===r.grid_id?'active':''}" data-grid="${esc(r.grid_id)}">
+  <span class="rank-box">${rank}</span>
+  <span>
+    <span class="row-name">${esc(r.region_name)}</span>
+    <span class="row-sub">${esc(r.province_name)}</span>
+    <span class="row-sub">${fmt(r.detection_count)} observasi  Aktif ${r.active_days_7d} dari 7 hari</span>
+  </span>
+  <span class="row-score" style="color:${color(r.priority_level)}">${fmt(r.priority_score,1)}<small>${r.priority_level}  /100</small></span>
+</button>`;
+}
+
+function drawQueue(){
+  el('queue').innerHTML=current.length
+    ?current.slice(0,10).map((r,i)=>rowBtn(r,i+1)).join('')
+    :'<div class="empty">Tidak ada area untuk kombinasi filter ini. Coba tanggal atau wilayah lain.</div>';
+  el('queue').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.grid,true)));
+}
+
+function fitMap(){
+  if(map&&current.length)map.fitBounds(current.map(r=>[r.latitude,r.longitude]),{padding:[28,28],maxZoom:9});
+  else if(map)map.setView([.1,114],6);
+}
+
+function localTime(r){
+  const wib=['Kalimantan Barat','Kalimantan Tengah'].includes(r.province_name);
+  return new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short',timeZone:wib?'Asia/Jakarta':'Asia/Makassar'}).format(new Date(r.last_seen_utc))+(wib?' WIB':' WITA');
+}
+
 function choose(id,zoom=false){
- const r=current.find(x=>x.grid_id===id);if(!r)return;selected=id;drawQueue();
- const parts=[['Aktivitas · jumlah deteksi harian (40%)',r.activity_points,40],['Persistensi · hari aktif 7 hari (35%)',r.persistence_points,35],['FRP / Intensitas median relatif (25%)',r.intensity_points,25]];
- const strongest=[...parts].sort((a,b)=>b[1]-a[1])[0][0].toLowerCase();
- el('detail').innerHTML=`<div class="detail-title"><div><b>${esc(r.region_name)}</b><div class="muted small">${esc(r.province_name)} · Grid ${esc(r.grid_id)} · ${r.date} UTC</div></div><div style="text-align:right"><b style="color:${color(r.priority_level)}">${fmt(r.priority_score,1)} / 100</b><div class="small">${r.priority_level} · ${levelText(r.priority_level)}</div></div></div><div class="small">Area ini memiliki ${fmt(r.detection_count)} observasi pada tanggal terpilih, terdeteksi pada ${r.active_days_7d} dari 7 hari terakhir, dengan FRP median ${fmt(r.frp_median_mw,2)} MW. Kontribusi skor terbesar: <b>${strongest}</b>.</div><div class="bars">${parts.map(([n,v,max])=>`<div><div class="bar-label"><span>${n}</span><span>${fmt(v,2)} / ${max} poin</span></div><div class="bar-track"><div class="bar-fill" style="width:${v/max*100}%"></div></div></div>`).join('')}</div><div class="facts" style="grid-template-columns:1fr 1fr 1fr"><div class="fact"><span>Latitude · Longitude</span>${fmt(r.latitude,5)}&nbsp;&nbsp;${fmt(r.longitude,5)}</div><div class="fact"><span>Tanggal observasi (UTC)</span>${r.date}</div><div class="fact"><span>Sumber data</span>NASA FIRMS · VIIRS NOAA-20</div><div class="fact" style="border-left:3px solid ${color(r.priority_level)}"><span>Priority Level</span>${r.priority_level} · ${levelText(r.priority_level)}</div><div class="fact" style="border-left:3px solid ${color(r.priority_level)}"><span>Priority Score</span>${fmt(r.priority_score,1)} / 100</div><div class="fact"><span>Aktivitas · deteksi hari ini</span>${fmt(r.detection_count)} observasi</div><div class="fact"><span>Persistensi · aktif 7 hari terakhir</span>${r.active_days_7d} dari 7 hari</div><div class="fact"><span>FRP median (intensitas api)</span>${fmt(r.frp_median_mw,2)} MW · maks ${fmt(r.frp_max_mw,2)} MW</div><div class="fact"><span>Jarak ke sekolah terdekat <small style="font-weight:400">(konteks eksposur)</small></span>${r.nearest_school_km!=null?fmt(r.nearest_school_km,2)+' km':'Tidak tersedia'} · ${esc(r.nearest_school_name)}</div><div class="fact"><span>Waktu deteksi terakhir (UTC)</span>${esc(r.last_seen_utc)}<br><small>${localTime(r)}</small></div><div class="fact"><span>Kualitas deteksi FIRMS</span>Tinggi ${r.high_count} · Nominal ${r.nominal_count} · Rendah ${r.low_count} · Tdk dikenal ${r.unknown_count}</div><div class="fact" style="border-left:3px solid #c0a060;background:#fdf8ec"><span>Luas area terdampak</span><span style="color:#8a6820">Tidak tersedia · keterbatasan data</span><span style="font-size:10px;color:#a08040">Data luas terdampak belum ada di dataset utama NASA FIRMS. Ini keterbatasan dataset, bukan nilai nol.</span></div></div><div class="note">${esc(r.quality_note)}. Grid 0,1° ≈ 11 km per sisi; ini unit pengelompokan, bukan batas kebakaran. Luas area terdampak tidak tersedia di dataset utama dan tidak dimasukkan sebagai fakta. Jarak sekolah, populasi, dan cuaca hanya sebagai konteks eksposur, bukan bobot skor.</div><div class="small muted" style="margin-top:10px">Sumber: NASA FIRMS / VIIRS NOAA-20. Sekolah: dataset referensi Indonesia (Kaggle), kelengkapan dan kondisi aktual belum diverifikasi. Waktu pembangunan prototipe: ${esc(meta.generated_at_utc)}.</div>`;
- if(map){selection.clearLayers();const step=meta.grid_degrees;L.rectangle([[r.grid_y*step,r.grid_x*step],[(r.grid_y+1)*step,(r.grid_x+1)*step]],{color:'#264f40',weight:2,fillOpacity:.08,dashArray:'5 4'}).addTo(selection);if(zoom)map.setView([r.latitude,r.longitude],9);}
-}
-function drawTrend(){
- const end=new Date(el('date').value+'T00:00:00Z');if(Number.isNaN(end.getTime())){el('trend').innerHTML='<div class="empty">Pilih tanggal untuk membaca aktivitas tujuh hari.</div>';return;}
- const p=el('province').value;const days=Array.from({length:7},(_,i)=>new Date(end.getTime()-(6-i)*86400000).toISOString().slice(0,10));
- const counts=days.map(d=>rows.filter(r=>r.date===d&&(!p||r.province_name===p)).reduce((n,r)=>n+r.detection_count,0));const max=Math.max(1,...counts);
- el('trend').innerHTML=`<svg viewBox="0 0 630 160" role="img" aria-label="Observasi tujuh hari: ${days.map((d,i)=>d+': '+counts[i]).join(', ')}">${days.map((d,i)=>{const h=counts[i]/max*98,x=15+i*89;return `<rect x="${x}" y="${121-h}" width="54" height="${h}" rx="3" fill="${i===6?'#244d40':'#becd9e'}"></rect><text x="${x+27}" y="${115-h}" text-anchor="middle" font-size="11" fill="#244d40">${fmt(counts[i])}</text><text x="${x+27}" y="142" text-anchor="middle" font-size="10" fill="#627376">${d.slice(5)}</text>`;}).join('')}</svg><div class="small muted">Hari sebelum ${meta.date_start} berada di luar cakupan berkas. Nol berarti tidak ada observasi dalam berkas; cakupan sensor harian tidak tersedia.</div>`;
-}
-function update(){
- const d=el('date').value,mode=el('mode').value,p=el('province').value,k=el('kabupaten').value,l=el('level').value;
- el('date').disabled=mode==='all';el('prev-day').disabled=mode==='all'||d<=meta.date_start;el('next-day').disabled=mode==='all'||d>=meta.date_end;
- current=rows.filter(r=>(mode==='all'||r.date===d)&&(!p||r.province_name===p)&&(!k||r.region_name===k)&&(!l||r.priority_level===l)).sort((a,b)=>b.priority_score-a.priority_score||(a.grid_id<b.grid_id?-1:a.grid_id>b.grid_id?1:0));
- selected=null;
- el('k-observations').textContent=fmt(current.reduce((s,r)=>s+r.detection_count,0));el('k-areas').textContent=fmt(current.length);el('k-p1').textContent=fmt(current.filter(r=>r.priority_level==='P1').length);
- const values=current.map(r=>r.frp_median_mw).filter(v=>v!=null).sort((a,b)=>a-b),n=values.length;
- el('k-frp').textContent=n?fmt((values[Math.floor((n-1)/2)]+values[Math.floor(n/2)])/2,1):'—';
- el('list-info').textContent=mode==='all'?`Riwayat seluruh periode: ${fmt(current.length)} grid-hari. Skor tetap bersifat harian dan tidak dibandingkan antar tanggal.`:`Menampilkan ${Math.min(10,current.length)} dari ${fmt(current.length)} area. Skor dibandingkan terhadap semua area aktif Kalimantan pada hari yang sama. Filter mengubah daftar, bukan bobot.`;
- if(map){circles.clearLayers();numbers.clearLayers();selection.clearLayers();const top=new Map(current.slice(0,10).map((r,i)=>[r.grid_id,i+1]));
-  for(const r of current){const tooltip=`${esc(r.region_name)} · ${esc(r.grid_id)}<br>${r.date} UTC · terakhir ${localTime(r)}<br>${r.priority_level} · skor ${fmt(r.priority_score,1)}${top.has(r.grid_id)?' · #'+top.get(r.grid_id):''}`;
-   L.circleMarker([r.latitude,r.longitude],{radius:5,weight:1,color:'#fff',fillColor:color(r.priority_level),fillOpacity:.85}).bindTooltip(tooltip).on('click',()=>choose(r.grid_id)).addTo(circles);
-   if(top.has(r.grid_id))L.marker([r.latitude,r.longitude],{title:`Prioritas ${top.get(r.grid_id)}: ${r.region_name}`,icon:L.divIcon({className:'top-marker',html:String(top.get(r.grid_id)),iconSize:[29,29]})}).bindTooltip(tooltip).on('click',()=>choose(r.grid_id)).addTo(numbers);
+  const r=current.find(x=>x.grid_id===id);if(!r)return;selected=id;drawQueue();
+  const comps=[
+    {name:'Aktivitas',desc:'Jumlah Deteksi Harian',wt:'40%',pts:r.activity_points,max:40,col:'#1C7A8A'},
+    {name:'Persistensi',desc:'Hari Aktif dalam 7 Hari',wt:'35%',pts:r.persistence_points,max:35,col:'#D68910'},
+    {name:'FRP Intensitas',desc:'FRP Median Relatif',wt:'25%',pts:r.intensity_points,max:25,col:'#C0392B'}
+  ];
+  const topComp=[...comps].sort((a,b)=>b.pts-a.pts)[0].name.toLowerCase();
+  el('detail').innerHTML=`
+<div class="det">
+  <div class="det-hdr">
+    <div>
+      <div class="det-name">${esc(r.region_name)}</div>
+      <div class="det-loc">${esc(r.province_name)}  Grid ${esc(r.grid_id)}  ${r.date}</div>
+    </div>
+    <div>
+      <div class="det-score-num" style="color:${color(r.priority_level)}">${fmt(r.priority_score,1)}<span style="font-size:15px;font-weight:400;color:var(--label)"> dari 100</span></div>
+      <div class="det-score-tag"><span class="pill" style="background:${color(r.priority_level)}">${r.priority_level}</span>  ${levelText(r.priority_level)}</div>
+    </div>
+  </div>
+  <div class="det-summary">Area ini memiliki ${fmt(r.detection_count)} observasi pada tanggal terpilih, terdeteksi pada ${r.active_days_7d} dari 7 hari terakhir, dengan FRP median ${fmt(r.frp_median_mw,2)} MW. Kontribusi skor terbesar dari ${topComp}.</div>
+  <div class="section-lbl">Komponen Skor</div>
+  <div class="bars">${comps.map(c=>`
+  <div>
+    <div class="bar-hd">
+      <span><span class="bar-name">${c.name}</span><span class="bar-wt">${c.desc}  Bobot ${c.wt}</span></span>
+      <span><span class="bar-pts">${fmt(c.pts,2)}</span><span class="bar-pts-of"> dari ${c.max} poin</span></span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:${c.pts/c.max*100}%;background:${c.col}"></div></div>
+  </div>`).join('')}</div>
+  <div class="section-lbl">Data Observasi</div>
+  <div class="facts">
+    <div class="fact"><span class="fact-lbl">Latitude</span><div class="fact-val">${fmt(r.latitude,5)}</div></div>
+    <div class="fact"><span class="fact-lbl">Longitude</span><div class="fact-val">${fmt(r.longitude,5)}</div></div>
+    <div class="fact"><span class="fact-lbl">Tanggal Observasi</span><div class="fact-val">${r.date}</div></div>
+    <div class="fact" style="border-left:3px solid ${color(r.priority_level)}"><span class="fact-lbl">Priority Level</span><div class="fact-val" style="color:${color(r.priority_level)}">${r.priority_level}</div><span class="fact-sub">${levelText(r.priority_level)}</span></div>
+    <div class="fact" style="border-left:3px solid ${color(r.priority_level)}"><span class="fact-lbl">Priority Score</span><div class="fact-val" style="color:${color(r.priority_level)}">${fmt(r.priority_score,1)}<span style="font-size:13px;font-weight:400;color:var(--label)"> dari 100</span></div></div>
+    <div class="fact"><span class="fact-lbl">Aktivitas</span><div class="fact-val">${fmt(r.detection_count)}</div><span class="fact-sub">deteksi pada tanggal ini</span></div>
+    <div class="fact"><span class="fact-lbl">Persistensi</span><div class="fact-val">${r.active_days_7d}<span style="font-size:13px;font-weight:400;color:var(--label)"> dari 7 hari</span></div></div>
+    <div class="fact"><span class="fact-lbl">FRP Median</span><div class="fact-val">${fmt(r.frp_median_mw,2)} MW</div><span class="fact-sub">Maksimum ${fmt(r.frp_max_mw,2)} MW</span></div>
+    <div class="fact"><span class="fact-lbl">Jarak ke Sekolah Terdekat</span><div class="fact-val">${r.nearest_school_km!=null?fmt(r.nearest_school_km,2)+' km':'Tidak Tersedia'}</div><span class="fact-sub">${esc(r.nearest_school_name)}  Konteks Eksposur</span></div>
+    <div class="fact"><span class="fact-lbl">Waktu Deteksi Terakhir</span><div class="fact-val" style="font-size:14px">${esc(r.last_seen_utc)}</div><span class="fact-sub">${localTime(r)}</span></div>
+    <div class="fact"><span class="fact-lbl">Kualitas Deteksi FIRMS</span><div class="fact-val" style="font-size:14px">Tinggi ${r.high_count}  Nominal ${r.nominal_count}  Rendah ${r.low_count}</div></div>
+    <div class="fact"><span class="fact-lbl">Sumber Data</span><div class="fact-val" style="font-size:14px">NASA FIRMS</div><span class="fact-sub">VIIRS NOAA-20</span></div>
+    <div class="fact fact-lim"><span class="fact-lbl">Luas Area Terdampak</span><div class="fact-val">Tidak Tersedia</div><span class="fact-sub">Keterbatasan dataset. NASA FIRMS tidak menyediakan estimasi luas area. Bukan nilai nol.</span></div>
+  </div>
+  <div class="note-box">${esc(r.quality_note)}. Grid 0.1 derajat setara sekitar 11 km per sisi. Ini unit pengelompokan, bukan batas kebakaran. Jarak sekolah, populasi, dan cuaca hanya konteks eksposur, bukan bobot skor.</div>
+  <div class="src-line">Sumber NASA FIRMS VIIRS NOAA-20. Referensi sekolah dari dataset Indonesia di Kaggle, kelengkapan dan kondisi aktual belum diverifikasi. Prototipe dibangun pada ${esc(meta.generated_at_utc)}.</div>
+</div>`;
+  if(map){
+    selection.clearLayers();
+    const s=meta.grid_degrees;
+    L.rectangle([[r.grid_y*s,r.grid_x*s],[(r.grid_y+1)*s,(r.grid_x+1)*s]],{color:'#1C7A8A',weight:2,fillOpacity:.05,dashArray:'5 4'}).addTo(selection);
+    if(zoom)map.setView([r.latitude,r.longitude],9);
   }
-  if(heat)heat.setLatLngs(current.map(r=>[r.latitude,r.longitude,r.priority_score/100]));
-  choropleth.eachLayer(layer=>{const id=layer.feature.properties.region_id;const matching=current.filter(r=>r.region_id===id);const avg=matching.length?matching.reduce((s,r)=>s+r.priority_score,0)/matching.length:null;layer.setStyle({fillColor:avg==null?'#dce2d8':scoreColor(avg),fillOpacity:avg==null?.25:.5});layer.unbindTooltip();layer.bindTooltip(`${esc(layer.feature.properties.region_name)}<br>${avg==null?'Tidak ada area terpilih':`Rata-rata skor ${fmt(avg,1)} · ${matching.length} area`}`);});
- }
- drawQueue();drawTrend();
- if(current.length)choose(current[0].grid_id);else el('detail').innerHTML='<div class="empty">Belum ada area yang dapat ditampilkan. Data kosong tidak menyimpulkan wilayah aman.</div>';
 }
-el('method').innerHTML=`<p><b>Unit:</b> grid 0,1° × tanggal UTC. Hari aktif menghitung kemunculan observasi pada tanggal yang berbeda, termasuk hari terpilih. Tidak membuktikan api menyala terus.</p><p><b>Skor baseline (DSA-confirmed):</b> Bobot yang dipakai: <b>Aktivitas 40%</b> (persentil jumlah deteksi harian) + <b>Persistensi 7 hari 35%</b> (proporsi hari aktif / 7) + <b>FRP / Intensitas 25%</b> (persentil FRP median). Persentil memakai mid-rank; semua nilai sama mendapat 0,5, dan nilai nol mendapat 0. Skor serta batas P1/P2/P3 adalah aturan sementara, belum dikalibrasi terhadap label kejadian lapangan. <b>Jarak sekolah, populasi, dan cuaca hanya sebagai konteks eksposur; tidak masuk ke formula bobot.</b></p><p><b>Ruang lingkup:</b> ${fmt(meta.raw_rows)} observasi mentah → ${fmt(meta.kalimantan_observations)} observasi di poligon BIG → ${fmt(meta.grid_day_rows)} grid-hari. ${fmt(meta.unmatched_polygon_rows)} baris tidak cocok dengan poligon dan disimpan dalam audit terpisah; penyebabnya tidak otomatis dianggap koordinat salah.</p><p><b>Batas peta:</b> ${esc(meta.region_note)} Perhitungan scope menggunakan poligon BIG asli; garis yang disederhanakan di layar hanya untuk tampilan.</p><p><b>Keterbatasan data:</b> Data luas area terdampak tidak tersedia di dataset utama (NASA FIRMS tidak menyediakan estimasi area per deteksi). Tidak ada pengambilan data terbaru, pengiriman notifikasi, validasi laporan warga. Jam satelit adalah waktu observasi, tidak mengukur waktu verifikasi lapangan.</p><p><b>Sensitivitas Top 10:</b> rata-rata Jaccard varian bobot sama = ${fmt(meta.sensitivity.find(s=>s.variant==='equal_three')?.mean_top10_jaccard,3)} pada hari dengan lebih dari 10 area. Nilai 1 berarti anggotanya sama; ini uji kestabilan, bukan akurasi.</p><p><a href="https://firms.modaps.eosdis.nasa.gov/active_fire/" target="_blank" rel="noopener">NASA FIRMS</a> · <a href="https://geoservices.big.go.id/gis/rest/services/STIG/Batas_Provinsi/MapServer" target="_blank" rel="noopener">BIG batas provinsi</a> · <a href="https://www.kaggle.com/datasets/marchotridyo/indonesia-school-dataset-with-province-data" target="_blank" rel="noopener">Referensi sekolah</a></p>`;
-el('footer').textContent=`FIRELINE / ${meta.version} · Dibangun ${meta.generated_at_utc} · Dataset terakhir ${meta.date_end} UTC · Prototipe DSA untuk review PMA/UX`;
-el('date').addEventListener('change',update);el('mode').addEventListener('change',update);el('prev-day').addEventListener('click',()=>shiftDate(-1));el('next-day').addEventListener('click',()=>shiftDate(1));el('province').addEventListener('change',()=>{updateKabupatenOptions();el('kabupaten').value='';update();});el('kabupaten').addEventListener('change',update);el('level').addEventListener('change',update);el('fit').addEventListener('click',fitMap);
-el('reset').addEventListener('click',()=>{el('mode').value='day';el('date').value=meta.demo_date;el('province').value='';el('kabupaten').value='';el('level').value='';updateKabupatenOptions();update();fitMap();});updateKabupatenOptions();update();fitMap();
+
+function drawTrend(){
+  const end=new Date(el('date').value+'T00:00:00Z');
+  if(isNaN(end.getTime())){el('trend').innerHTML='<div class="empty">Pilih tanggal untuk membaca aktivitas tujuh hari.</div>';return;}
+  const p=el('province').value;
+  const days=Array.from({length:7},(_,i)=>new Date(end.getTime()-(6-i)*864e5).toISOString().slice(0,10));
+  const counts=days.map(d=>rows.filter(r=>r.date===d&&(!p||r.province_name===p)).reduce((n,r)=>n+r.detection_count,0));
+  const maxVal=Math.max(1,...counts);
+  const W=570,H=185,pL=52,pB=36,pT=20,pR=12;
+  const cW=W-pL-pR,cH=H-pB-pT;
+  const mag=Math.pow(10,Math.floor(Math.log10(maxVal||1)));
+  const yMax=Math.ceil(maxVal/mag)*mag||10;
+  const yTicks=Array.from({length:5},(_,i)=>Math.round(yMax/4*i));
+  const bW=Math.floor(cW/7)-10;
+  el('trend').innerHTML=`
+<div class="chart-y-title">Jumlah Observasi</div>
+<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Observasi 7 hari" style="font-family:'Source Sans 3','Segoe UI',sans-serif">
+  ${yTicks.map(v=>{const y=(pT+cH-v/yMax*cH).toFixed(1);return `<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="#E8E8E8" stroke-width="1"/><text x="${pL-6}" y="${(+y+4).toFixed(1)}" text-anchor="end" font-size="12" fill="#999">${fmt(v)}</text>`;}).join('')}
+  ${days.map((d,i)=>{const h=Math.max(0,counts[i]/yMax*cH);const bx=(pL+i*(cW/7)+5).toFixed(1);const by=(pT+cH-h).toFixed(1);const cx=(+bx+bW/2).toFixed(1);const isLast=i===6;return `<rect x="${bx}" y="${by}" width="${bW}" height="${h.toFixed(1)}" rx="2" fill="${isLast?'#1C7A8A':'#7EB8C4'}"/>${counts[i]>0?`<text x="${cx}" y="${(+by-5).toFixed(1)}" text-anchor="middle" font-size="12" font-weight="600" fill="${isLast?'#135060':'#3A8FA0'}">${fmt(counts[i])}</text>`:''}<text x="${cx}" y="${(H-5).toFixed(1)}" text-anchor="middle" font-size="12" fill="#999">${d.slice(5)}</text>`;}).join('')}
+  <line x1="${pL}" y1="${pT}" x2="${pL}" y2="${pT+cH}" stroke="#C0C0C0" stroke-width="1.5"/>
+  <line x1="${pL}" y1="${pT+cH}" x2="${W-pR}" y2="${pT+cH}" stroke="#C0C0C0" stroke-width="1.5"/>
+</svg>
+<div style="font-size:11px;color:var(--label);margin-top:4px">Hari sebelum ${meta.date_start} berada di luar cakupan berkas. Nol berarti tidak ada observasi.</div>`;
+}
+
+function update(){
+  const d=el('date').value,mode=el('mode').value,p=el('province').value,k=el('kabupaten').value,l=el('level').value;
+  el('date').disabled=mode==='all';el('prev-day').disabled=mode==='all'||d<=meta.date_start;el('next-day').disabled=mode==='all'||d>=meta.date_end;
+  current=rows.filter(r=>(mode==='all'||r.date===d)&&(!p||r.province_name===p)&&(!k||r.region_name===k)&&(!l||r.priority_level===l))
+    .sort((a,b)=>b.priority_score-a.priority_score||(a.grid_id<b.grid_id?-1:a.grid_id>b.grid_id?1:0));
+  selected=null;
+  el('k-observations').textContent=fmt(current.reduce((s,r)=>s+r.detection_count,0));
+  el('k-areas').textContent=fmt(current.length);
+  el('k-p1').textContent=fmt(current.filter(r=>r.priority_level==='P1').length);
+  const vs=current.map(r=>r.frp_median_mw).filter(v=>v!=null).sort((a,b)=>a-b),n=vs.length;
+  el('k-frp').textContent=n?fmt((vs[Math.floor((n-1)/2)]+vs[Math.floor(n/2)])/2,1)+' MW':'—';
+  el('list-bar').textContent=mode==='all'
+    ?`Riwayat seluruh periode  ${fmt(current.length)} grid hari. Skor bersifat harian.`
+    :`Menampilkan ${Math.min(10,current.length)} dari ${fmt(current.length)} area.`;
+  if(map){
+    circles.clearLayers();numbers.clearLayers();selection.clearLayers();
+    const top=new Map(current.slice(0,10).map((r,i)=>[r.grid_id,i+1]));
+    for(const r of current){
+      const tt=`${esc(r.region_name)}<br>${r.date}  ${r.priority_level}  Skor ${fmt(r.priority_score,1)}${top.has(r.grid_id)?' Peringkat '+top.get(r.grid_id):''}`;
+      L.circleMarker([r.latitude,r.longitude],{radius:5,weight:1.5,color:'white',fillColor:color(r.priority_level),fillOpacity:.9}).bindTooltip(tt).on('click',()=>choose(r.grid_id)).addTo(circles);
+      if(top.has(r.grid_id))L.marker([r.latitude,r.longitude],{title:`Prioritas ${top.get(r.grid_id)}: ${r.region_name}`,icon:L.divIcon({className:'top-marker',html:String(top.get(r.grid_id)),iconSize:[29,29]})}).bindTooltip(tt).on('click',()=>choose(r.grid_id)).addTo(numbers);
+    }
+    if(heat)heat.setLatLngs(current.map(r=>[r.latitude,r.longitude,r.priority_score/100]));
+    choropleth.eachLayer(layer=>{
+      const id=layer.feature.properties.region_id;
+      const mt=current.filter(r=>r.region_id===id);
+      const avg=mt.length?mt.reduce((s,r)=>s+r.priority_score,0)/mt.length:null;
+      layer.setStyle({fillColor:avg==null?'#DDDDDD':scoreColor(avg),fillOpacity:avg==null?.15:.4});
+      layer.unbindTooltip();
+      layer.bindTooltip(`${esc(layer.feature.properties.region_name)}<br>${avg==null?'Tidak Ada Area Terpilih':'Rata-rata Skor '+fmt(avg,1)+'  '+mt.length+' area'}`);
+    });
+  }
+  drawQueue();drawTrend();
+  if(current.length)choose(current[0].grid_id);
+  else el('detail').innerHTML='<div class="empty">Belum ada area yang dapat ditampilkan. Data kosong tidak menyimpulkan wilayah aman.</div>';
+}
+
+el('method').innerHTML=`
+<p><b>Unit.</b> Grid 0.1 derajat kali tanggal UTC. Hari aktif menghitung kemunculan observasi pada tanggal yang berbeda termasuk hari terpilih. Tidak membuktikan api menyala terus.</p>
+<p><b>Skor Baseline DSA Confirmed.</b> Bobot yang dipakai adalah Aktivitas 40% yaitu persentil jumlah deteksi harian, Persistensi 7 hari 35% yaitu proporsi hari aktif dibagi 7, dan FRP Intensitas 25% yaitu persentil FRP median. Persentil memakai mid-rank. Semua nilai sama mendapat 0.5 dan nilai nol mendapat 0. Skor serta batas P1 P2 P3 adalah aturan sementara, belum dikalibrasi terhadap label kejadian lapangan. Jarak sekolah, populasi, dan cuaca hanya sebagai konteks eksposur dan tidak masuk ke formula bobot.</p>
+<p><b>Ruang Lingkup.</b> ${fmt(meta.raw_rows)} observasi mentah menghasilkan ${fmt(meta.kalimantan_observations)} observasi di poligon BIG dan ${fmt(meta.grid_day_rows)} grid hari. Sebanyak ${fmt(meta.unmatched_polygon_rows)} baris tidak cocok dengan poligon dan disimpan dalam audit terpisah.</p>
+<p><b>Batas Peta.</b> ${esc(meta.region_note)} Perhitungan scope menggunakan poligon BIG asli. Garis yang disederhanakan di layar hanya untuk tampilan.</p>
+<p><b>Keterbatasan Data.</b> Data luas area terdampak tidak tersedia di dataset utama. NASA FIRMS tidak menyediakan estimasi area per deteksi. Tidak ada pengambilan data terbaru, pengiriman notifikasi, atau validasi laporan warga. Jam satelit adalah waktu observasi, tidak mengukur waktu verifikasi lapangan.</p>
+<p><b>Sensitivitas Top 10.</b> Rata-rata Jaccard varian bobot sama adalah ${fmt(meta.sensitivity.find(s=>s.variant==='equal_three')?.mean_top10_jaccard,3)} pada hari dengan lebih dari 10 area. Nilai 1 berarti anggotanya sama. Ini uji kestabilan, bukan akurasi.</p>
+<p><a href="https://firms.modaps.eosdis.nasa.gov/active_fire/" target="_blank" rel="noopener">NASA FIRMS</a>  <a href="https://geoservices.big.go.id/gis/rest/services/STIG/Batas_Provinsi/MapServer" target="_blank" rel="noopener">BIG Batas Provinsi</a>  <a href="https://www.kaggle.com/datasets/marchotridyo/indonesia-school-dataset-with-province-data" target="_blank" rel="noopener">Referensi Sekolah</a></p>`;
+
+el('footer').textContent=`FIRELINE  ${meta.version}  Dibangun ${meta.generated_at_utc}  Dataset terakhir ${meta.date_end}  Prototipe DSA untuk review PMA UX`;
+el('date').addEventListener('change',update);
+el('mode').addEventListener('change',update);
+el('prev-day').addEventListener('click',()=>shiftDate(-1));
+el('next-day').addEventListener('click',()=>shiftDate(1));
+el('province').addEventListener('change',()=>{updateKab();el('kabupaten').value='';update();});
+el('kabupaten').addEventListener('change',update);
+el('level').addEventListener('change',update);
+el('fit').addEventListener('click',fitMap);
+el('reset').addEventListener('click',()=>{el('mode').value='day';el('date').value=meta.demo_date;el('province').value='';el('kabupaten').value='';el('level').value='';updateKab();update();fitMap();});
+updateKab();update();fitMap();
 </script>
 </body></html>
