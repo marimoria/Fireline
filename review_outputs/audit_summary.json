@@ -1,6 +1,6 @@
 {
   "version": "priority-map-1.0",
-  "generated_at_utc": "2026-09-13T05:23:06+00:00",
+  "generated_at_utc": "2026-09-14T11:13:21+00:00",
   "mode": "historical_prototype",
   "raw_rows": 61583,
   "kalimantan_observations": 60736,
@@ -149,14 +149,14 @@
   ],
   "sources": {
     "firms_csv": {
-      "file": "fireline_hotspot_kalimantan_viirs_noaa20_2024_2026.csv",
+      "file": "Fireline_hotspot_kalimantan_viirs_noaa20_2024_2026.csv",
       "bytes": 4989683,
       "sha256": "c1661c7b6652b111e5652e172e7d8ad21a3f7b45eb018acdd97786d13c484a5d"
     },
     "provinces_geojson": {
       "file": "kalimantan_provinces.geojson",
-      "bytes": 30711058,
-      "sha256": "e922916953e9c5a34a5d741e20a90711b81f5720d39d808c1bb318f2742be1b4"
+      "bytes": 28702505,
+      "sha256": "c85ee4064c8cb381dd8a75cefa94e6c60cd1222c6f55ae0315ed5502b27037b8"
     },
     "schools_csv": {
       "file": "complete_data.csv",
