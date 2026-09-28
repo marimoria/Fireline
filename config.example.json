@@ -1,0 +1,7 @@
+{
+  "firms_csv": "data/raw/fireline_hotspot_kalimantan_viirs_noaa20_2024_2026.csv",
+  "provinces_geojson": "data/raw/kalimantan_provinces.geojson",
+  "schools_csv": "data/raw/complete_data.csv",
+  "kaka_html": null,
+  "grid_degrees": 0.1
+}

@@ -1,0 +1,172 @@
+{
+  "version": "priority-map-1.0",
+  "generated_at_utc": "2026-09-13T11:18:56+00:00",
+  "mode": "historical_prototype",
+  "raw_rows": 61583,
+  "kalimantan_observations": 60708,
+  "unmatched_polygon_rows": 875,
+  "invalid_coordinate_time_rows": 0,
+  "grid_day_rows": 26773,
+  "unique_grids": 2846,
+  "date_start": "2024-08-01",
+  "date_end": "2026-05-31",
+  "demo_date": "2024-09-03",
+  "demo_observations": 2399,
+  "schools_in_boundary": 17278,
+  "weights": {
+    "activity": 0.4,
+    "persistence": 0.35,
+    "intensity": 0.25
+  },
+  "grid_degrees": 0.1,
+  "region_note": "Kab/kota dari HTML Kaka; sumber dan tahun boundary belum tercantum. Hanya konteks visual.",
+  "boundary_count": 5,
+  "visual_boundary_count": 56,
+  "frp_missing_observations": 0,
+  "confidence_counts": {
+    "n": 56458,
+    "h": 2313,
+    "l": 1937
+  },
+  "unmapped_representative_grid_days": 56,
+  "median_representative_school_km": 2.843,
+  "stage_counts": [
+    {
+      "stage": "Mentah",
+      "retained": 61583,
+      "removed": 0
+    },
+    {
+      "stage": "Duplikat persis dihapus",
+      "retained": 61583,
+      "removed": 0
+    },
+    {
+      "stage": "Koordinat dan waktu valid",
+      "retained": 61583,
+      "removed": 0
+    },
+    {
+      "stage": "Type 0 (dugaan api vegetasi)",
+      "retained": 61583,
+      "removed": 0
+    },
+    {
+      "stage": "Di dalam poligon BIG Kalimantan",
+      "retained": 60708,
+      "removed": 875
+    }
+  ],
+  "province_counts": [
+    {
+      "province": "Kalimantan Barat",
+      "observations": 36019
+    },
+    {
+      "province": "Kalimantan Timur",
+      "observations": 10191
+    },
+    {
+      "province": "Kalimantan Tengah",
+      "observations": 8478
+    },
+    {
+      "province": "Kalimantan Selatan",
+      "observations": 3583
+    },
+    {
+      "province": "Kalimantan Utara",
+      "observations": 2437
+    }
+  ],
+  "sensitivity": [
+    {
+      "variant": "equal_three",
+      "weights": {
+        "activity": 0.3333333333333333,
+        "persistence": 0.3333333333333333,
+        "intensity": 0.3333333333333333
+      },
+      "days_with_more_than_10_areas": 362,
+      "mean_top10_jaccard": 0.8668,
+      "min_top10_jaccard": 0.4286
+    },
+    {
+      "variant": "activity_heavy",
+      "weights": {
+        "activity": 0.55,
+        "persistence": 0.25,
+        "intensity": 0.2
+      },
+      "days_with_more_than_10_areas": 362,
+      "mean_top10_jaccard": 0.8809,
+      "min_top10_jaccard": 0.4286
+    },
+    {
+      "variant": "persistence_heavy",
+      "weights": {
+        "activity": 0.25,
+        "persistence": 0.55,
+        "intensity": 0.2
+      },
+      "days_with_more_than_10_areas": 362,
+      "mean_top10_jaccard": 0.7931,
+      "min_top10_jaccard": 0.25
+    },
+    {
+      "variant": "without_activity",
+      "weights": {
+        "activity": 0,
+        "persistence": 0.5833333333333334,
+        "intensity": 0.4166666666666667
+      },
+      "days_with_more_than_10_areas": 362,
+      "mean_top10_jaccard": 0.5739,
+      "min_top10_jaccard": 0.0
+    },
+    {
+      "variant": "without_persistence",
+      "weights": {
+        "activity": 0.6153846153846154,
+        "persistence": 0,
+        "intensity": 0.3846153846153846
+      },
+      "days_with_more_than_10_areas": 362,
+      "mean_top10_jaccard": 0.7429,
+      "min_top10_jaccard": 0.1111
+    },
+    {
+      "variant": "without_intensity",
+      "weights": {
+        "activity": 0.5333333333333333,
+        "persistence": 0.4666666666666666,
+        "intensity": 0
+      },
+      "days_with_more_than_10_areas": 362,
+      "mean_top10_jaccard": 0.6005,
+      "min_top10_jaccard": 0.1765
+    }
+  ],
+  "sources": {
+    "firms_csv": {
+      "file": "fireline_hotspot_kalimantan_viirs_noaa20_2024_2026.csv",
+      "bytes": 4989683,
+      "sha256": "c1661c7b6652b111e5652e172e7d8ad21a3f7b45eb018acdd97786d13c484a5d"
+    },
+    "provinces_geojson": {
+      "file": "kalimantan_provinces.geojson",
+      "bytes": 137832,
+      "sha256": "8ca724dba471b515e9e0c0a5e51aa125169bfaed3023ee64ea03ce64856398ca"
+    },
+    "schools_csv": {
+      "file": "complete_data.csv",
+      "bytes": 24943481,
+      "sha256": "9fecf9e24dcebe082aab0ac3f5c5cd815d6f8336c26f7d0a7b16e958dae83043"
+    },
+    "kaka_html": {
+      "file": "composite_score_explainable_map_v2.html",
+      "bytes": 3211673,
+      "sha256": "2cbfc7458066224ba1e44982a31338dbc2c02b543ef54deefa5f8b280340285e"
+    }
+  }
+}
